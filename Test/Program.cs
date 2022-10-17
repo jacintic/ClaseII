@@ -9,4 +9,4 @@ var test5 = "test";
 // collission
 var coll = "Cambio desde Github";
 // collission 2
-var coll2 = "pre coll";
+var coll2 = "coll from Github";

@@ -7,4 +7,4 @@ var test4 = "test";
 // from github
 var test5 = "test";
 // collission
-var coll = "yes yes";
+var coll = "Cambio desde Github";

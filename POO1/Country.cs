@@ -35,13 +35,6 @@ public class Country
         Languages.ForEach(l => list += "\t. " + l + "\n");
         return list;
     }
-
-    public void TestMethod(Language lang)
-    {
-        Console.WriteLine(lang);
-        Console.WriteLine(typeof(Language).IsInstanceOfType(lang) ? "yes" : "no");
-    }
-
     public override string ToString()
     {
         return $"Country data: {CountryName}\n" +

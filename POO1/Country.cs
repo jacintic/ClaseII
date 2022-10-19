@@ -9,17 +9,44 @@ namespace POO1;
 public class Country
 {
     // attributes
-    public string CountryName;
-    public string Capital;
-    public float Surface;
-    public string[] Languages;
-    public string MainLanguage;
+    public string? CountryName;
+    public string? Capital;
+    public float? Surface;
+    public List<Language>? Languages;
+    public Language? MainLanguage;
     // constructor
     public Country() { }
 
+    // methods
+
+    public void InitializeList()
+    {
+        Languages = new List<Language>();
+    }
+    public void AddLangToList(Language lang)
+    {
+        Languages.Add(lang);
+
+    }
+
+    public string PrintLangs()
+    {
+        string list = "\n";
+        Languages.ForEach(l => list += "\t. " + l + "\n");
+        return list;
+    }
+
+    public void TestMethod(Language lang)
+    {
+        Console.WriteLine(lang);
+        Console.WriteLine(typeof(Language).IsInstanceOfType(lang) ? "yes" : "no");
+    }
+
     public override string ToString()
     {
-        return $"Country data: {CountryName}";
+        return $"Country data: {CountryName}\n" +
+            $"Main language: {MainLanguage}\n" +
+            $"Languages spoken in country: {PrintLangs()}";
     }
 
 

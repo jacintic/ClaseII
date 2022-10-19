@@ -103,14 +103,24 @@ Console.WriteLine(coche1.NumPersons + " " + coche1.Status);
 
 */
 
-// address + country
+// address + country + langs
+
+Language lang1 = new Language { LanguageName = "Catalan" };
+Language lang2 = new Language { LanguageName = "Spanish" };
+Language lang3 = new Language { LanguageName = "English" };
 
 Country country = new Country
 {
     CountryName = "Spain",
     Capital = "Madrid",
-    MainLanguage = "Spanish"
+    MainLanguage = lang1
 };
+
+
+country.InitializeList(); // without this the list won't take any inputs
+country.AddLangToList(lang1);
+country.AddLangToList(lang2);
+country.AddLangToList(lang3);
 
 Address location = new Address
 {
@@ -121,5 +131,4 @@ Address location = new Address
 };
 
 Console.WriteLine(location);
-
 

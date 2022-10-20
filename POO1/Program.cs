@@ -160,12 +160,70 @@ Console.WriteLine(customer1.Greeting.Greet("Manolo"));
 // 4. Utilizar los métodos desde Program.cs
 
 IComputerRepository ComputerRepo = new ComputerListRepository();
-Console.WriteLine("Find all");
+
+// find all
+Console.WriteLine("// Find all //");
 List<Computer> CompList = ComputerRepo.FindAll();
-foreach (Computer comp in CompList)
-    Console.WriteLine(comp);
-Console.WriteLine("Find by Id: 2");
+Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList));
+
+
+// Find by id
+Console.WriteLine("\n\n// Find by Id: 2 //");
 Console.WriteLine(ComputerRepo.FindOneById(2));
+
+// get id list 
+Console.WriteLine("\n\n// Get Computers by ID {2,3} //");
+List<Computer> CompList2 = ComputerRepo.GetByIds(new int[] { 2, 3 });
+Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList2));
+
+// recuperar por  minimo y maximo de Ram
+Console.WriteLine("\n\n// Get COmputers by ID {2,3} //");
+List<Computer> CompList3 = ComputerRepo.FindAllByRamRange(16, 32);
+Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList3));
+
+// buscar por su Modelo
+Console.WriteLine("\n\n// Get Computers by Model (Asus A55A) //");
+Computer CompByModel = ComputerRepo.FindOneByModel("Asus A55A");
+Console.WriteLine(CompByModel);
+
+
+// crear
+Console.WriteLine("\n\n// Add computers to repo //");
+bool wasTransactionSuccessful = ComputerRepo.AddComputersToRepo(new List<Computer>
+        {
+            new Computer { Id = 4, Model = "Dell Pro 300", Ram = 16 },
+            new Computer { Id = 5, Model = "MSI Gaming Pro", Ram = 64 },
+            new Computer { Id = 6, Model = "Asus 305D", Ram = 10 },
+        });
+Console.WriteLine("Transaction Status: " + (wasTransactionSuccessful ?  "Success" : "No rows added")); ;
+Console.WriteLine(ComputerRepo.PrintComputerRepo(ComputerRepo.FindAll()));
+
+
+// modificar
+Console.WriteLine("\n\n// Modify Computer //");
+bool UpdateWasSuccessful = ComputerRepo.UpdateComputerRamFromRepo(4,32);
+Console.WriteLine("Transaction Status: " + (UpdateWasSuccessful ? "Success" : "No computer Updated"));
+Console.WriteLine("Checking computer update, initial RAM value was 16, new one was 32");
+Console.WriteLine(ComputerRepo.FindOneById(4));
+
+//borrar por ids
+Console.WriteLine("\n\n// Delete computers from Repo by ID List {4,6}//");
+bool DeleteWasSuccessful = ComputerRepo.DeleteRange(new List<int> { 4,6});
+Console.WriteLine("Checking delete by Id transaction status");
+Console.WriteLine("Transaction Status: " + (DeleteWasSuccessful ? "Success" : "No rows deleted"));
+Console.WriteLine("// Find all //");
+List<Computer> CompList4 = ComputerRepo.FindAll();
+Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList4));
+
+// borrar todos
+Console.WriteLine("\n\n// Delete all computers from repo//");
+bool DeleteAllWasSuccessful = ComputerRepo.DeleteAll();
+Console.WriteLine("Checking delete all transaction status");
+Console.WriteLine("Transaction Status: " + (DeleteAllWasSuccessful ? "Success" : "No rows deleted"));
+Console.WriteLine("// Find all //");
+List<Computer> CompList5 = ComputerRepo.FindAll();
+Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList5));
+Console.WriteLine("");
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Intrinsics.Arm;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,5 +67,60 @@ public class ComputerListRepository : IComputerRepository
             if (c.Ram >= min && c.Ram <= max)
                 cl.Add(c);
         return cl;       
+    }
+
+    public Computer FindOneByModel(string model)
+    {
+        List<Computer> cl = new List<Computer>();
+        foreach (Computer c in computers)
+            if (c.Model == model)
+                return c;
+        return null;
+    }
+
+    // add a list of computers to repo
+    public bool AddComputersToRepo(List<Computer> computerList)
+    {
+        int count =  computers.Count;
+        computers.AddRange(computerList);
+        return computers.Count > count;
+    }
+    public bool UpdateComputerRamFromRepo(int id, int ram)
+    {
+        if (ExistsById(id) && FindOneById(id).Ram != ram)
+        {
+            FindOneById(id).Ram = ram;
+            return true;
+        }
+        return false;
+    }
+
+    public bool DeleteRange(List<int> IdsList)
+    {
+        int initialCount = computers.Count;
+        foreach (int i in IdsList)
+        {
+            if (ExistsById(i))
+            {
+                computers.Remove(FindOneById(i));
+            }
+        }
+        return computers.Count < initialCount;
+    }
+
+    public bool DeleteAll()
+    {
+        int count = computers.Count;
+        computers.Clear();
+        return count > 0 && computers.Count == 0;
+    }
+
+    // I
+    // print computer repo
+    public string PrintComputerRepo(List<Computer> computerList)
+    {
+        StringBuilder sb = new StringBuilder("");
+        computerList.ForEach(mov => sb.Append("." + mov + "\n"));
+        return sb.ToString();
     }
 }

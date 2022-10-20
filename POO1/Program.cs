@@ -102,8 +102,9 @@ coche1.Stop();
 Console.WriteLine(coche1.NumPersons + " " + coche1.Status);
 
 */
+/*
 
-// address + country + langs
+// // address + country + langs
 
 Language lang1 = new Language { LanguageName = "Catalan" };
 Language lang2 = new Language { LanguageName = "Spanish" };
@@ -144,7 +145,27 @@ Customer customer1 = new Customer
 };
 
 Console.WriteLine(customer1);
-customer1.Greeting.Greet();
+customer1.Greet();
 customer1.Greeting = new InformalGreeting();
-customer1.Greeting.Greet();
+customer1.Greet();
 Console.WriteLine(customer1.Greeting.Greet("Manolo"));
+
+*/
+
+// // COMPUTER
+
+// 1. Crear clase Computer
+// 2. Crear una interface IComputerRepository con operaciones CRUD sobre una lista de Computer
+// 3. Crear una implementación de la interface
+// 4. Utilizar los métodos desde Program.cs
+
+IComputerRepository ComputerRepo = new ComputerListRepository();
+Console.WriteLine("Find all");
+List<Computer> CompList = ComputerRepo.FindAll();
+foreach (Computer comp in CompList)
+    Console.WriteLine(comp);
+Console.WriteLine("Find by Id: 2");
+Console.WriteLine(ComputerRepo.FindOneById(2));
+
+
+

@@ -25,6 +25,12 @@ public class Customer
         Address = address;
     }
 
+    public void Greet()
+    {
+        Greeting.Greet();
+    }
+
+
     public override string ToString()
     {
         return "Customer: \n" +

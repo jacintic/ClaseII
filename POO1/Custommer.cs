@@ -12,6 +12,7 @@ public class Customer
     public string Name;
     public string Email;
     public Address Address;
+    public IGreeting Greeting;
 
     public Customer()
     {

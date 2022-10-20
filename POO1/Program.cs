@@ -130,13 +130,21 @@ Address location = new Address
     Country = country
 };
 
+// interface greetings
+IGreeting greeting = new FormalGreeting();
+
 // address data
 Customer customer1 = new Customer
 {
     Dni = "123",
     Name = "Gumersindo",
     Email = "a@b.com",
-    Address = location
+    Address = location,
+    Greeting = greeting
 };
 
 Console.WriteLine(customer1);
+customer1.Greeting.Greet();
+customer1.Greeting = new InformalGreeting();
+customer1.Greeting.Greet();
+Console.WriteLine(customer1.Greeting.Greet("Manolo"));

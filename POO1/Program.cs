@@ -113,7 +113,7 @@ Country country = new Country
 {
     CountryName = "Spain",
     Capital = "Madrid",
-    MainLanguage = lang1
+    MainLanguage = lang2
 };
 
 
@@ -130,5 +130,13 @@ Address location = new Address
     Country = country
 };
 
-Console.WriteLine(location);
+// address data
+Customer customer1 = new Customer
+{
+    Dni = "123",
+    Name = "Gumersindo",
+    Email = "a@b.com",
+    Address = location
+};
 
+Console.WriteLine(customer1);

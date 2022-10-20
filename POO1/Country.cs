@@ -41,6 +41,4 @@ public class Country
             $"Main language: {MainLanguage}\n" +
             $"Languages spoken in country: {PrintLangs()}";
     }
-
-
 }

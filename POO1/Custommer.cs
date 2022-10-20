@@ -9,6 +9,7 @@ namespace POO1;
 public class Customer
 {
     public string Dni;
+    public string Name;
     public string Email;
     public Address Address;
 
@@ -26,8 +27,10 @@ public class Customer
     public override string ToString()
     {
         return "Customer: \n" +
+            $"ID: {Dni}\n" +
+            $"Name: {Name}\n" +
             $"Email: {Email}\n" +
-            $"Address: {Address}";
+            $"{Address}";
     }
 
 }

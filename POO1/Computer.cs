@@ -17,9 +17,9 @@ public class Computer
     public override string ToString()
     {
         return "\nComputer: "+
-                $"Id: {Id} "+
-                $"Model: {Model} "+
-                $"Ram: {Ram}";
+                    $"Id: {Id} "+
+                    $"Model: {Model} "+
+                    $"Ram: {Ram}";
     }
 }
 

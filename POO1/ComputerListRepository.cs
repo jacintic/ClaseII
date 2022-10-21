@@ -133,23 +133,14 @@ public class ComputerListRepository : IComputerRepository
         return counter;
     }
 
-    // I
-    // print computer repo
-    public string PrintComputerRepo()
-    {
-        return string.Join(", ", computers);
-        /*StringBuilder sb = new StringBuilder("");
-        computerList.ForEach(mov => sb.Append("." + mov + "\n"));
-        return sb.ToString();*/
-    }
 
     public string PrintComputerList(List<Computer> list)
     {
-        return string.Join(", ", list);
+        return string.Join("", list);
     }
 
     public string PrintAll()
     {
-        return string.Join(", ", computers);
+        return string.Join("", computers);
     }
 }

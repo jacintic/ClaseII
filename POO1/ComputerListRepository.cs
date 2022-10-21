@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
@@ -71,19 +72,28 @@ public class ComputerListRepository : IComputerRepository
 
     public Computer FindOneByModel(string model)
     {
-        List<Computer> cl = new List<Computer>();
         foreach (Computer c in computers)
-            if (c.Model == model)
+            if (c.Model.ToLower().Equals(model.ToLower()))
                 return c;
         return null;
     }
+    public bool Save(Computer computer)
+    {
+        if (ExistsById(computer.Id))
+            return false;
+        int presave = Count();
+        computers.Add(computer);
+        return ++presave == Count();
+    }
 
     // add a list of computers to repo
-    public bool AddComputersToRepo(List<Computer> computerList)
+    public int AddComputersToRepo(List<Computer> computerList)
     {
-        int count =  computers.Count;
-        computers.AddRange(computerList);
-        return computers.Count > count;
+        int counter = 0;
+        computerList.ForEach(c => {if (Save(c)) counter++; });
+        // NOTICE: this method counts ONLY the registers added by this transaction alone
+        // and ONLY when they're successful
+        return counter;
     }
     public bool UpdateComputerRamFromRepo(int id, int ram)
     {
@@ -115,12 +125,31 @@ public class ComputerListRepository : IComputerRepository
         return count > 0 && computers.Count == 0;
     }
 
+    // new methods
+    public int Count()
+    {
+        int counter = 0;
+        computers.ForEach(c => counter++);
+        return counter;
+    }
+
     // I
     // print computer repo
-    public string PrintComputerRepo(List<Computer> computerList)
+    public string PrintComputerRepo()
     {
-        StringBuilder sb = new StringBuilder("");
+        return string.Join(", ", computers);
+        /*StringBuilder sb = new StringBuilder("");
         computerList.ForEach(mov => sb.Append("." + mov + "\n"));
-        return sb.ToString();
+        return sb.ToString();*/
+    }
+
+    public string PrintComputerList(List<Computer> list)
+    {
+        return string.Join(", ", list);
+    }
+
+    public string PrintAll()
+    {
+        return string.Join(", ", computers);
     }
 }

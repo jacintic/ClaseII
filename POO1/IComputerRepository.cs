@@ -23,8 +23,12 @@ public interface IComputerRepository
 
     // buscar por su Modelo
     Computer FindOneByModel(string model);
+    
+    // add one
+    public bool Save(Computer computer);
+    
     // crear
-    bool AddComputersToRepo(List<Computer> computerList);
+    int AddComputersToRepo(List<Computer> computerList);
 
     // modificar
     bool UpdateComputerRamFromRepo(int id, int ram);
@@ -35,6 +39,35 @@ public interface IComputerRepository
     // borrar todos
     bool DeleteAll();
     // print list
-    string PrintComputerRepo(List<Computer> computerList);
+    string PrintComputerList(List<Computer> list);
+
+    // print all
+    string PrintAll();
+
     // NOTICE: can or should this method be abstracted and overriden? What property would abstract List?
+
+
+    // TODO: 
+
+    //  recuperar el numero de ordenadores en lista (count)
+    // metodo count existe y esto es redundante
+    public int Count();
+    // refactorizar codigo implementando Count() en los metodos necesarios
+
+    // -- // crear una clase ComputerValidator con un método validate que reciba un Computer
+    // devuelva true o false si cumple una serie de condiciones:
+    // Id mayor que 0 
+    // RAM mayor que 2 y menor que 256
+    // Model no puede ser nulo ni estar vacío y tiene que tener una longitud superior a 3 letras
+    // Utilizar este validador antes de guardar un ordenador
+
+    // comprovar el modelo con regex
+    // añadir attribute precio
+    // calcular precio total de lista
+    // ram media de todos los ordenadores
+    // ram maxima de todos los ordenadores
+
+    // Recomendación: programar
+    // poner github modo publico
+
 }

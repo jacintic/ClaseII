@@ -164,7 +164,7 @@ IComputerRepository ComputerRepo = new ComputerListRepository();
 // find all
 Console.WriteLine("// Find all //");
 List<Computer> CompList = ComputerRepo.FindAll();
-Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList));
+Console.WriteLine(ComputerRepo.PrintComputerList(CompList));
 
 
 // Find by id
@@ -174,30 +174,64 @@ Console.WriteLine(ComputerRepo.FindOneById(2));
 // get id list 
 Console.WriteLine("\n\n// Get Computers by ID {2,3} //");
 List<Computer> CompList2 = ComputerRepo.GetByIds(new int[] { 2, 3 });
-Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList2));
+Console.WriteLine(ComputerRepo.PrintComputerList(CompList2));
 
 // recuperar por  minimo y maximo de Ram
 Console.WriteLine("\n\n// Get COmputers by ID {2,3} //");
 List<Computer> CompList3 = ComputerRepo.FindAllByRamRange(16, 32);
-Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList3));
+Console.WriteLine(ComputerRepo.PrintComputerList(CompList3));
 
 // buscar por su Modelo
 Console.WriteLine("\n\n// Get Computers by Model (Asus A55A) //");
 Computer CompByModel = ComputerRepo.FindOneByModel("Asus A55A");
 Console.WriteLine(CompByModel);
 
+// create/save one
+Console.WriteLine("\n\n//  // Create one computer Ids 12(new) and 1(duplicate) // //");
+Computer cmp1 = new Computer
+{
+    Id = 12, Model = "Corsair 35D2", Ram = 64
+};
+Console.WriteLine("\nFirst computer transaction. Save Id= 12 (non duplicate)");
+bool IsComputerSaved = ComputerRepo.Save(cmp1);
+Console.WriteLine("Transaction Status: " + (IsComputerSaved ? "Success" : "No computer Saved"));
+Console.WriteLine("// Find by Id: 12 //");
+Console.WriteLine(ComputerRepo.FindOneById(12));
+// // second computer with duplicate Id
+Computer cmp2 = new Computer
+{
+    Id = 1,
+    Model = "Corsair 35D2",
+    Ram = 64
+};
+Console.WriteLine("\nSecond computer transaction. Save Id= 1 (duplicate)");
+bool IsComputerSaved2 = ComputerRepo.Save(cmp2);
+Console.WriteLine("Transaction Status: " + (IsComputerSaved2 ? "Success" : "No computer Saved"));
+Console.WriteLine("// Find by Id: 1 //");
+Console.WriteLine(ComputerRepo.FindOneById(1));
+
 
 // crear
-Console.WriteLine("\n\n// Add computers to repo //");
-bool wasTransactionSuccessful = ComputerRepo.AddComputersToRepo(new List<Computer>
+    // case 1
+Console.WriteLine("\n\n// Add computers to repo Success + All rows added //");
+int numComputersAdded = ComputerRepo.AddComputersToRepo(new List<Computer>
         {
             new Computer { Id = 4, Model = "Dell Pro 300", Ram = 16 },
             new Computer { Id = 5, Model = "MSI Gaming Pro", Ram = 64 },
             new Computer { Id = 6, Model = "Asus 305D", Ram = 10 },
         });
-Console.WriteLine("Transaction Status: " + (wasTransactionSuccessful ?  "Success" : "No rows added")); ;
-Console.WriteLine(ComputerRepo.PrintComputerRepo(ComputerRepo.FindAll()));
-
+Console.WriteLine("Transaction Status: " + (numComputersAdded > 0 ?  "Success" : "No rows added") + " Total Computers Added: " + numComputersAdded + " of " + 3); ;
+Console.WriteLine(ComputerRepo.PrintAll());
+    // case 2
+Console.WriteLine("\n// Add computers to repo Success + Not all rows added //");
+int numComputersAdded2 = ComputerRepo.AddComputersToRepo(new List<Computer>
+        {
+            new Computer { Id = 1, Model = "HP MX 300", Ram = 16 },
+            new Computer { Id = 7, Model = "Asus 2500 3X", Ram = 64 },
+            new Computer { Id = 8, Model = "Corsair DG5", Ram = 10 },
+        });
+Console.WriteLine("Transaction Status: " + (numComputersAdded2 > 0 ? "Success" : "No rows added") + " Total Computers Added: " + numComputersAdded2 + " of " + 3); ;
+Console.WriteLine(ComputerRepo.PrintAll());
 
 // modificar
 Console.WriteLine("\n\n// Modify Computer //");
@@ -213,7 +247,7 @@ Console.WriteLine("Checking delete by Id transaction status");
 Console.WriteLine("Transaction Status: " + (DeleteWasSuccessful ? "Success" : "No rows deleted"));
 Console.WriteLine("// Find all //");
 List<Computer> CompList4 = ComputerRepo.FindAll();
-Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList4));
+Console.WriteLine(ComputerRepo.PrintAll());
 
 // borrar todos
 Console.WriteLine("\n\n// Delete all computers from repo//");
@@ -222,7 +256,7 @@ Console.WriteLine("Checking delete all transaction status");
 Console.WriteLine("Transaction Status: " + (DeleteAllWasSuccessful ? "Success" : "No rows deleted"));
 Console.WriteLine("// Find all //");
 List<Computer> CompList5 = ComputerRepo.FindAll();
-Console.WriteLine(ComputerRepo.PrintComputerRepo(CompList5));
+Console.WriteLine(ComputerRepo.PrintAll());
 Console.WriteLine("");
 
 

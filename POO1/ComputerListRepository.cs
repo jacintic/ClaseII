@@ -166,7 +166,6 @@ public class ComputerListRepository : IComputerRepository
                 removeCounter++;
         }
         return removeCounter;
-
     }
 
     public bool DeleteAll()
@@ -207,15 +206,28 @@ public class ComputerListRepository : IComputerRepository
         return RamSum / Count();
     }
 
-    public double GetMaxRamFromRepo()
+    public int FindMaxRam()
     {
         int MaxRam = 0;
         computers.ForEach(c =>
         {
-            if (c.Ram > MaxRam)
+            if (MaxRam < c.Ram)
                 MaxRam = c.Ram;
         });
         return MaxRam;
+    }
+
+    public int FindMinRam()
+    {
+        int MinRam = 0;
+        computers.ForEach(c =>
+        {
+            if (MinRam == 0)
+                MinRam = c.Ram;
+            if (MinRam > c.Ram)
+                MinRam = c.Ram;
+        });
+        return MinRam;
     }
 
     // new methods

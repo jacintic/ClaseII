@@ -81,7 +81,9 @@ public interface IComputerRepository
     double CalcAverageRamFromAllRepo();
 
     // ram maxima de todos los ordenadores
-    double GetMaxRamFromRepo();
+    int FindMaxRam();
+
+    int FindMinRam();
 
     // Recomendación: programar
     // poner github modo publico

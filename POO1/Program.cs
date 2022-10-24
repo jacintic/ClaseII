@@ -293,8 +293,12 @@ Console.WriteLine("\n\n// Print Average Ram from Repo //");
 Console.WriteLine($"Average RAM of repo: {ComputerRepo.CalcAverageRamFromAllRepo()}");
 
 // print Max Ram from Repo
-Console.WriteLine("\n\n// Print Average Ram from Repo //");
-Console.WriteLine($"Max RAM of repo: {ComputerRepo.GetMaxRamFromRepo()}");
+Console.WriteLine("\n\n// Print Max Ram from Repo //");
+Console.WriteLine($"Max RAM of repo: {ComputerRepo.FindMaxRam()}");
+
+// print Min Ram from Repo
+Console.WriteLine("\n\n// Print Min Ram from Repo //");
+Console.WriteLine($"Min RAM of repo: {ComputerRepo.FindMinRam()}");
 
 // -- NOTICE --//
 // computers getting deleted beyond this point
@@ -305,7 +309,6 @@ int TotalDeletions = ComputerRepo.DeleteFromIdList(new List<int> { 4,6});
 Console.WriteLine("Checking delete by Id transaction status");
 Console.WriteLine("Transaction Status: " + (TotalDeletions == 2 ? "Success" : "No rows deleted OR not all rows deleted. Number of rows deleted: " + TotalDeletions + " of " + 2));
 Console.WriteLine("// Find all //");
-List<Computer> CompList4 = ComputerRepo.FindAll();
 Console.WriteLine(ComputerRepo.PrintAll());
 
 // borrar todos

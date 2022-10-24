@@ -226,11 +226,24 @@ Console.WriteLine(ComputerRepo.PrintAll());
 Console.WriteLine("\n// Add computers to repo Success + Not all rows added //");
 int numComputersAdded2 = ComputerRepo.AddComputersToRepo(new List<Computer>
         {
-            new Computer { Id = 1, Model = "HP MX 300", Ram = 16 },
             new Computer { Id = 7, Model = "Asus 2500 3X", Ram = 64 },
             new Computer { Id = 8, Model = "Corsair DG5", Ram = 10 },
+            // NOTICE: Invalid computers
+            // // id exists
+            new Computer { Id = 1, Model = "HP MX 300", Ram = 16 },
+            // // id = 0
+            new Computer { Id = 0, Model = "Computer Should fial", Ram = 10 },
+            // // ram = 2
+            new Computer { Id = 35, Model = "Computer Should fial", Ram = 2 },
+            new Computer { Id = 35, Model = "Computer Should fial", Ram = 256 },
+            // // model 3 leters
+            new Computer { Id = 67, Model = "123", Ram = 2 },
+            // model  null
+            new Computer { Id = 67, Model = null, Ram = 2 },
+            // model empty
+            new Computer { Id = 67, Model = "", Ram = 2 },
         });
-Console.WriteLine("Transaction Status: " + (numComputersAdded2 > 0 ? "Success" : "No rows added") + " Total Computers Added: " + numComputersAdded2 + " of " + 3); ;
+Console.WriteLine("Transaction Status: " + (numComputersAdded2 > 0 ? "Success" : "No rows added") + " Total Computers Added: " + numComputersAdded2 + " of " + 9); ;
 Console.WriteLine(ComputerRepo.PrintAll());
 
 // modificar
@@ -239,6 +252,15 @@ bool UpdateWasSuccessful = ComputerRepo.UpdateComputerRamFromRepo(4,32);
 Console.WriteLine("Transaction Status: " + (UpdateWasSuccessful ? "Success" : "No computer Updated"));
 Console.WriteLine("Checking computer update, initial RAM value was 16, new one was 32");
 Console.WriteLine(ComputerRepo.FindOneById(4));
+
+
+// find compuer LIKE
+Console.WriteLine("\n\n// Get COmputers by model LIKE  string//");
+List<Computer> CompListLike = ComputerRepo.ComputerModelIsLike("Asus");
+Console.WriteLine(ComputerRepo.PrintComputerList(CompListLike));
+
+// -- NOTICE --//
+// computers getting deleted beyond this point
 
 //borrar por ids
 Console.WriteLine("\n\n// Delete computers from Repo by ID List {4,6}//");

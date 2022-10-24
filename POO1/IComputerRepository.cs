@@ -60,8 +60,12 @@ public interface IComputerRepository
     // RAM mayor que 2 y menor que 256
     // Model no puede ser nulo ni estar vacío y tiene que tener una longitud superior a 3 letras
     // Utilizar este validador antes de guardar un ordenador
+    public bool IsValidComputer(Computer computer);
+
 
     // comprovar el modelo con regex
+    public List<Computer> ComputerModelIsLike(string model);
+
     // añadir attribute precio
     // calcular precio total de lista
     // ram media de todos los ordenadores

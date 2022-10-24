@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace POO1;
@@ -32,8 +34,8 @@ public class ComputerListRepository : IComputerRepository
         /*Computer found = null;
         computers.ForEach( c => { if (c.Id == Id) { found = c; } });
         return found;*/
-        foreach(Computer c in computers)
-            if(c.Id == Id) return c;
+        foreach (Computer c in computers)
+            if (c.Id == Id) return c;
         return null;
         // proper way would be to throw an exception
         // for computer not found and handle it
@@ -53,9 +55,9 @@ public class ComputerListRepository : IComputerRepository
     public List<Computer> GetByIds(int[] Ids)
     {
         List<Computer> computers = new List<Computer>();
-        foreach(int id in Ids)
+        foreach (int id in Ids)
         {
-            if(ExistsById(id))
+            if (ExistsById(id))
                 computers.Add(FindOneById(id));
         }
         return computers;
@@ -64,10 +66,10 @@ public class ComputerListRepository : IComputerRepository
     public List<Computer> FindAllByRamRange(int min, int max)
     {
         List<Computer> cl = new List<Computer>();
-        foreach ( Computer c in computers)
+        foreach (Computer c in computers)
             if (c.Ram >= min && c.Ram <= max)
                 cl.Add(c);
-        return cl;       
+        return cl;
     }
 
     public Computer FindOneByModel(string model)
@@ -79,18 +81,17 @@ public class ComputerListRepository : IComputerRepository
     }
     public bool Save(Computer computer)
     {
-        if (ExistsById(computer.Id))
+        if (ExistsById(computer.Id) && !IsValidComputer(computer))
             return false;
-        int presave = Count();
         computers.Add(computer);
-        return ++presave == Count();
+        return true;
     }
 
     // add a list of computers to repo
     public int AddComputersToRepo(List<Computer> computerList)
     {
         int counter = 0;
-        computerList.ForEach(c => {if (Save(c)) counter++; });
+        computerList.ForEach(c => { if (Save(c)) counter++; });
         // NOTICE: this method counts ONLY the registers added by this transaction alone
         // and ONLY when they're successful
         return counter;
@@ -105,17 +106,33 @@ public class ComputerListRepository : IComputerRepository
         return false;
     }
 
+    public List<Computer> ComputerModelIsLike(string model)
+    {
+        string pattern = @".*(" + model.ToLower() + ").*";
+        Regex rg = new Regex(pattern);
+        List<Computer> computersLike = new List<Computer>();
+        computers.ForEach(c => 
+        {
+            MatchCollection matchedAuthors = rg.Matches(c.Model.ToLower());
+            if (matchedAuthors.Count > 0)
+                computersLike.Add(c);
+        });
+        return computersLike;
+    }
+
+    // NOTICE: deleting computers by this 
     public bool DeleteRange(List<int> IdsList)
     {
         int initialCount = computers.Count;
+        int removeCounter = 0;
         foreach (int i in IdsList)
         {
-            if (ExistsById(i))
+            if (ExistsById(i) && computers.Remove(FindOneById(i)))
             {
-                computers.Remove(FindOneById(i));
+                removeCounter++;
             }
         }
-        return computers.Count < initialCount;
+        return removeCounter == IdsList.Count();
     }
 
     public bool DeleteAll()
@@ -134,6 +151,7 @@ public class ComputerListRepository : IComputerRepository
     }
 
 
+    // -- UTILITIES -- //
     public string PrintComputerList(List<Computer> list)
     {
         return string.Join("", list);
@@ -142,5 +160,18 @@ public class ComputerListRepository : IComputerRepository
     public string PrintAll()
     {
         return string.Join("", computers);
+    }
+
+    public bool IsValidComputer(Computer computer)
+    {
+        return
+        // devuelva true o false si cumple una serie de condiciones:
+        // Id mayor que 0 
+        computer.Id > 0 &&
+        // RAM mayor que 2 y menor que 256
+        computer.Ram > 2 && computer.Ram < 256 &&
+        // Model no puede ser nulo ni estar vacío y tiene que tener una longitud superior a 3 letras
+        !(computer.Model is null) && !"".Equals(computer.Model) && computer.Model.Length > 3;
+
     }
 }

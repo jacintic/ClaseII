@@ -66,8 +66,12 @@ public interface IComputerRepository
     // comprovar el modelo con regex
     public List<Computer> ComputerModelIsLike(string model);
 
-    // añadir attribute precio
+    // añadir attribute 
+    public void AddPrices(double[] PriceList);
+
     // calcular precio total de lista
+
+
     // ram media de todos los ordenadores
     // ram maxima de todos los ordenadores
 

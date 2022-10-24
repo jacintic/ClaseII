@@ -259,6 +259,22 @@ Console.WriteLine("\n\n// Get COmputers by model LIKE  string//");
 List<Computer> CompListLike = ComputerRepo.ComputerModelIsLike("Asus");
 Console.WriteLine(ComputerRepo.PrintComputerList(CompListLike));
 
+// add prices
+Console.WriteLine("\n\n//  Insert Price attribute and its prices //");
+double[] PriceList = new double[9] {
+        1500.00,
+        1750.00,
+        750.00,
+        2500.00,
+        2650.00,
+        1700.00,
+        1000.00,
+        2300.00,
+        1500.00,
+    };
+ComputerRepo.AddPrices(PriceList);
+Console.WriteLine(ComputerRepo.PrintAll());
+
 // -- NOTICE --//
 // computers getting deleted beyond this point
 

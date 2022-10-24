@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ public class Computer
     public int Id;
     public string Model;
     public int Ram;
+    public double Price;
 
     public Computer() { }
 
@@ -19,7 +21,8 @@ public class Computer
         return "\nComputer: "+
                     $"Id: {Id} "+
                     $"Model: {Model} "+
-                    $"Ram: {Ram}";
+                    $"Ram: {Ram} " +
+                    $"Price: {Price}";
     }
 }
 

@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.Intrinsics.Arm;
+using System.Security.Authentication;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -81,7 +82,7 @@ public class ComputerListRepository : IComputerRepository
     }
     public bool Save(Computer computer)
     {
-        if (ExistsById(computer.Id) && !IsValidComputer(computer))
+        if (ExistsById(computer.Id) || !IsValidComputer(computer))
             return false;
         computers.Add(computer);
         return true;
@@ -140,6 +141,22 @@ public class ComputerListRepository : IComputerRepository
         int count = computers.Count;
         computers.Clear();
         return count > 0 && computers.Count == 0;
+    }
+
+    public void AddPrices(double[] PriceList)
+    { 
+        try
+        {
+            if (PriceList.Length != computers.Count)
+                throw new AuthenticationException("Lists do not match in length");
+        } 
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            return;
+        }
+        int index = 0;
+        computers.ForEach(c => { c.Price = PriceList[index]; index++; });
     }
 
     // new methods

@@ -33,6 +33,9 @@ public interface IComputerRepository
     // modificar
     bool UpdateComputerRamFromRepo(int id, int ram);
 
+    // // modificar II
+    bool UpdateComputer(Computer computer);
+
     //borrar por ids
     bool DeleteRange(List<int> IdsList);
 

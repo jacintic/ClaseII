@@ -107,6 +107,23 @@ public class ComputerListRepository : IComputerRepository
         return false;
     }
 
+    public bool UpdateComputer(Computer computer)
+    {
+        if (!IsValidComputer(computer))
+            return false;
+        computers.ForEach(c =>
+        {
+            if(c.Id == computer.Id)
+            {
+                c.Id = computer.Id;
+                c.Model = computer.Model;
+                c.Ram = computer.Ram;
+                c.Price = computer.Price;
+            }
+        });
+        return true;
+    }
+
     public List<Computer> ComputerModelIsLike(string model)
     {
         string pattern = @".*(" + model.ToLower() + ").*";

@@ -252,6 +252,14 @@ bool UpdateWasSuccessful = ComputerRepo.UpdateComputerRamFromRepo(4,32);
 Console.WriteLine("Transaction Status: " + (UpdateWasSuccessful ? "Success" : "No computer Updated"));
 Console.WriteLine("Checking computer update, initial RAM value was 16, new one was 32");
 Console.WriteLine(ComputerRepo.FindOneById(4));
+// modificar
+Console.WriteLine("\n// Modify Computer II (from Computer object) //");
+bool UpdateWasSuccessfulII = ComputerRepo.UpdateComputer(new Computer { Id = 1, Model = "Asus Pro 3500X", Ram = 32});
+Console.WriteLine("Transaction Status: " + (UpdateWasSuccessfulII ? "Success" : "No computer Updated"));
+Console.WriteLine("Checking computer update, initial values: \n  Id = 1, Model = MacBook Pro, Ram = 16" +
+    "\n New Values: \nId = 1, Model =Asus Pro 3500X, Ram = 32");
+Console.WriteLine(ComputerRepo.FindOneById(1));
+
 
 
 // find compuer LIKE

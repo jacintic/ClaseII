@@ -139,25 +139,42 @@ public class ComputerListRepository : IComputerRepository
     }
 
     // NOTICE: deleting computers by this 
-    public bool DeleteRange(List<int> IdsList)
+
+
+    public bool DeleteById(int id)
+    {
+        if (!ExistsById(id))
+            return false;
+        for (int j = 0; j < computers.Count; j++)
+        {
+            if (computers[j].Id == id)
+            {
+                computers.RemoveAt(j);
+                return true;
+            }   
+        }
+        return false;
+    }
+
+    public int DeleteFromIdList(List<int> IdsList)
     {
         int initialCount = computers.Count;
         int removeCounter = 0;
         foreach (int i in IdsList)
         {
-            if (ExistsById(i) && computers.Remove(FindOneById(i)))
-            {
+            if (DeleteById(i))
                 removeCounter++;
-            }
         }
-        return removeCounter == IdsList.Count();
+        return removeCounter;
+
     }
 
     public bool DeleteAll()
     {
-        int count = computers.Count;
+        if (!computers.Any())
+            return false;
         computers.Clear();
-        return count > 0 && computers.Count == 0;
+        return true;
     }
 
     public void AddPrices(double[] PriceList)
@@ -174,6 +191,31 @@ public class ComputerListRepository : IComputerRepository
         }
         int index = 0;
         computers.ForEach(c => { c.Price = PriceList[index]; index++; });
+    }
+
+    public double CalcPriceOfRepo()
+    {
+        double total = 0;
+        computers.ForEach(c => total += c.Price);
+        return total;
+    }
+
+    public double CalcAverageRamFromAllRepo()
+    {
+        double RamSum = 0;
+        computers.ForEach(c => RamSum += c.Ram);
+        return RamSum / Count();
+    }
+
+    public double GetMaxRamFromRepo()
+    {
+        int MaxRam = 0;
+        computers.ForEach(c =>
+        {
+            if (c.Ram > MaxRam)
+                MaxRam = c.Ram;
+        });
+        return MaxRam;
     }
 
     // new methods

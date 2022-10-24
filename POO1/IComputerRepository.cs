@@ -37,12 +37,14 @@ public interface IComputerRepository
     bool UpdateComputer(Computer computer);
 
     //borrar por ids
-    bool DeleteRange(List<int> IdsList);
+    int DeleteFromIdList(List<int> IdsList);
 
     // borrar todos
     bool DeleteAll();
     // print list
     string PrintComputerList(List<Computer> list);
+    // note in ComputerListRepository this method
+        // uses DeleteById(id) method inside the ID loop
 
     // print all
     string PrintAll();
@@ -73,10 +75,13 @@ public interface IComputerRepository
     public void AddPrices(double[] PriceList);
 
     // calcular precio total de lista
-
+    double CalcPriceOfRepo();
 
     // ram media de todos los ordenadores
+    double CalcAverageRamFromAllRepo();
+
     // ram maxima de todos los ordenadores
+    double GetMaxRamFromRepo();
 
     // Recomendación: programar
     // poner github modo publico

@@ -283,14 +283,27 @@ double[] PriceList = new double[9] {
 ComputerRepo.AddPrices(PriceList);
 Console.WriteLine(ComputerRepo.PrintAll());
 
+// print total price of Repo
+Console.WriteLine("\n\n// Print total price of Repo //");
+Console.WriteLine($"Total price of repo: {ComputerRepo.CalcPriceOfRepo()}");
+
+
+// print average ram from repo
+Console.WriteLine("\n\n// Print Average Ram from Repo //");
+Console.WriteLine($"Average RAM of repo: {ComputerRepo.CalcAverageRamFromAllRepo()}");
+
+// print Max Ram from Repo
+Console.WriteLine("\n\n// Print Average Ram from Repo //");
+Console.WriteLine($"Max RAM of repo: {ComputerRepo.GetMaxRamFromRepo()}");
+
 // -- NOTICE --//
 // computers getting deleted beyond this point
 
 //borrar por ids
 Console.WriteLine("\n\n// Delete computers from Repo by ID List {4,6}//");
-bool DeleteWasSuccessful = ComputerRepo.DeleteRange(new List<int> { 4,6});
+int TotalDeletions = ComputerRepo.DeleteFromIdList(new List<int> { 4,6});
 Console.WriteLine("Checking delete by Id transaction status");
-Console.WriteLine("Transaction Status: " + (DeleteWasSuccessful ? "Success" : "No rows deleted"));
+Console.WriteLine("Transaction Status: " + (TotalDeletions == 2 ? "Success" : "No rows deleted OR not all rows deleted. Number of rows deleted: " + TotalDeletions + " of " + 2));
 Console.WriteLine("// Find all //");
 List<Computer> CompList4 = ComputerRepo.FindAll();
 Console.WriteLine(ComputerRepo.PrintAll());

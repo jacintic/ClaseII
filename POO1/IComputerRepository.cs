@@ -65,7 +65,7 @@ public interface IComputerRepository
     // RAM mayor que 2 y menor que 256
     // Model no puede ser nulo ni estar vacío y tiene que tener una longitud superior a 3 letras
     // Utilizar este validador antes de guardar un ordenador
-    public bool IsValidComputer(Computer computer);
+    // // // -- -- -- implemented ComputerValidator Class
 
 
     // comprovar el modelo con regex

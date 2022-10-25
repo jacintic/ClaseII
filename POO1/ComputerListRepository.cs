@@ -15,6 +15,7 @@ public class ComputerListRepository : IComputerRepository
 {
     // attr
     private List<Computer> computers;
+    private ComputerValidaitior ComputerValidaitior;
     // const
     public ComputerListRepository()
     {
@@ -24,6 +25,7 @@ public class ComputerListRepository : IComputerRepository
             new Computer { Id = 2, Model = "MSI Modern", Ram = 32},
             new Computer { Id = 3, Model = "Asus A55A", Ram = 8},
         };
+        ComputerValidaitior = new ComputerValidaitior();
     }
     public List<Computer> FindAll()
     {
@@ -82,7 +84,7 @@ public class ComputerListRepository : IComputerRepository
     }
     public bool Save(Computer computer)
     {
-        if (ExistsById(computer.Id) || !IsValidComputer(computer))
+        if (ExistsById(computer.Id) || !ComputerValidaitior.Validate(computer))
             return false;
         computers.Add(computer);
         return true;
@@ -109,7 +111,7 @@ public class ComputerListRepository : IComputerRepository
 
     public bool UpdateComputer(Computer computer)
     {
-        if (!IsValidComputer(computer))
+        if (ComputerValidaitior.Validate(computer))
             return false;
         computers.ForEach(c =>
         {
@@ -222,9 +224,7 @@ public class ComputerListRepository : IComputerRepository
         int MinRam = 0;
         computers.ForEach(c =>
         {
-            if (MinRam == 0)
-                MinRam = c.Ram;
-            if (MinRam > c.Ram)
+            if (MinRam == 0 || MinRam > c.Ram)
                 MinRam = c.Ram;
         });
         return MinRam;
@@ -248,18 +248,5 @@ public class ComputerListRepository : IComputerRepository
     public string PrintAll()
     {
         return string.Join("", computers);
-    }
-
-    public bool IsValidComputer(Computer computer)
-    {
-        return
-        // devuelva true o false si cumple una serie de condiciones:
-        // Id mayor que 0 
-        computer.Id > 0 &&
-        // RAM mayor que 2 y menor que 256
-        computer.Ram > 2 && computer.Ram < 256 &&
-        // Model no puede ser nulo ni estar vacío y tiene que tener una longitud superior a 3 letras
-        !(computer.Model is null) && !"".Equals(computer.Model) && computer.Model.Length > 3;
-
     }
 }

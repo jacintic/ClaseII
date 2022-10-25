@@ -19,12 +19,7 @@ public class Film
 
     private string PrintCategories()
     {
-        string categoryList = "";
-        foreach (Category category in Categories)
-        {
-            categoryList += "\n\t. " + category.Name;
-        }
-        return categoryList;
+        return String.Join(" ", Categories.Select(c => $"\n\t.{c.Name}"));
     }
     public override string ToString()
     {

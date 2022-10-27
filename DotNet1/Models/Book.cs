@@ -13,4 +13,8 @@ public class Book
     // consturctor
     // methods
     // tostring
+    public override string ToString()
+    {
+        return $"Id: {Id}, Isbn:{Isbn}, Title: {Title}";
+    }
 }

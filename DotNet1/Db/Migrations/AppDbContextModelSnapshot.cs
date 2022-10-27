@@ -25,11 +25,20 @@ namespace DotNet1.Db.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("longtext")
+                        .HasColumnName("description");
+
                     b.Property<string>("Isbn")
                         .IsRequired()
                         .HasMaxLength(6)
                         .HasColumnType("varchar(6)")
                         .HasColumnName("isbn");
+
+                    b.Property<int>("ReleaseYear")
+                        .HasMaxLength(4)
+                        .HasColumnType("int")
+                        .HasColumnName("release_year");
 
                     b.Property<string>("Title")
                         .IsRequired()

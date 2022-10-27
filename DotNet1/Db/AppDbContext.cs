@@ -8,4 +8,12 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }
+
+/*
+    // Setting columns on a global level
+    protected override void ConfigureConventions(ModelConfigurationBuilder confBuilder)
+    {
+        confBuilder.Properties<string>().HaveMaxLength(100);
+    }
+*/
 }

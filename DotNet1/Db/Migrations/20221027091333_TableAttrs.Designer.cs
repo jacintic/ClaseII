@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNet1.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221026114208_Initial")]
-    partial class Initial
+    [Migration("20221027091333_TableAttrs")]
+    partial class TableAttrs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,15 +24,20 @@ namespace DotNet1.Db.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("id");
 
                     b.Property<string>("Isbn")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(6)
+                        .HasColumnType("varchar(6)")
+                        .HasColumnName("isbn");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)")
+                        .HasColumnName("title");
 
                     b.HasKey("Id");
 

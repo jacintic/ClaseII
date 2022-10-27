@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DotNet1.Db.Migrations
 {
-    public partial class Initial : Migration
+    public partial class TableAttrs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,16 +16,16 @@ namespace DotNet1.Db.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(type: "longtext", nullable: false)
+                    title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Isbn = table.Column<string>(type: "longtext", nullable: false)
+                    isbn = table.Column<string>(type: "varchar(6)", maxLength: 6, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.PrimaryKey("PK_Books", x => x.id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }

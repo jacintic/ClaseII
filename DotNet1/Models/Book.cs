@@ -1,13 +1,24 @@
 ﻿
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace DotNet1.Models;
 
 public class Book
 {
     // attr
-    [Key] // defining table column attributes
+    [Key, Column("id")] // defining table column attributes
     public int Id { get; set; }
 
+    [Required(ErrorMessage = "Title required"),
+    Column("title"),
+    MinLength(3), 
+    MaxLength(50, ErrorMessage ="Title too long (50-)")]
     public string Title { get; set; }
+
+    [Required,
+    Column("isbn"),
+    MinLength(5),
+    MaxLength(6, ErrorMessage = "Title too long (50-)")]
     public string Isbn { get; set; }
     // associations
     // consturctor

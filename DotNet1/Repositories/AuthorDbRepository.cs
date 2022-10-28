@@ -18,9 +18,22 @@ public class AuthorDbRepository : IAuthorRepository
     {
         Context = context;
     }
+
     // find authro by id
     public Author FindById(int id)
     {
         return Context.Authors.Find(id);
+    }
+
+    public List<Author> FindAll()
+    {
+        return Context.Authors.ToList();
+    }
+
+    public List<Author> FindSalGreaterThan(decimal sal) 
+    {
+        return Context.Authors
+        .Where(author => author.Salary > sal)
+        .ToList();
     }
 }

@@ -9,4 +9,10 @@ namespace DotNet1.Repositories;
 public interface IAuthorRepository
 {
     Author FindById(int id);
+
+    List<Author> FindAll();
+
+    List<Author> FindSalGreaterThan(decimal sal);
+
+
 }

@@ -25,6 +25,11 @@ IAuthorRepository authorRepo = new AuthorDbRepository(dbContext);
 
 Console.WriteLine("Auth1:" + authorRepo.FindById(1));
 
+Console.WriteLine("AuthList:\n" + string.Join("\n", authorRepo.FindAll()));
+
+Console.WriteLine("Auth sal greater than 1200.30: \n" + string.Join("\n", authorRepo.FindSalGreaterThan((decimal)1200.30)));
+
+
 
 void SaveOne()
 {

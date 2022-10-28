@@ -9,4 +9,5 @@ global using System.ComponentModel.DataAnnotations.Schema;
 global using DotNet1;
 global using DotNet1.Db;
 global using DotNet1.Models;
+global using DotNet1.Repositories;
 

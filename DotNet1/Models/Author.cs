@@ -32,6 +32,6 @@ public class Author
     // tostring
     public override string ToString()
     {
-        return $"Id: {Id}, FullName: {FullName}";
+        return $"Id: {Id}, FullName: {FullName}, Email: {Email}, Salary: {Salary}, Birth Date: {BirthDate}";
     }
 }

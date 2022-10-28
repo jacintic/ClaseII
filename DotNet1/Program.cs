@@ -1,6 +1,4 @@
-﻿using DotNet1.Models;
-
-Console.WriteLine("Welcome");
+﻿Console.WriteLine("Welcome");
 
 //SaveList();
 
@@ -11,7 +9,7 @@ Console.WriteLine("Welcome");
 /*FindFirst();
 FindSecond();
 FindById(1);*/
-Count();
+//Count();
 //Update() ;
 //Update2(new Book { Id = 2, Isbn = "11111", Title = "Don Quijote de la Mancha", ReleaseYear = 1850, Description = "From Update 2" });
 //UpdateMulti();
@@ -19,6 +17,14 @@ Count();
 //RemoveRange();
 //FindByTitle("Torrente");
 //FindByTitle("123");
+
+
+// Repositories
+AppDbContext dbContext = new AppDbContextFactory().CreateDbContext(null);
+IAuthorRepository authorRepo = new AuthorDbRepository(dbContext);
+
+Console.WriteLine("Auth1:" + authorRepo.FindById(1));
+
 
 void SaveOne()
 {

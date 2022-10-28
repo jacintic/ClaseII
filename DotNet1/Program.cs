@@ -1,4 +1,6 @@
-﻿Console.WriteLine("Welcome");
+﻿using DotNet1.Models;
+
+Console.WriteLine("Welcome");
 
 //SaveList();
 
@@ -8,6 +10,10 @@
 
 FindFirst();
 FindSecond();
+FindById(3);
+Count();
+Update() ;
+Update2(new Book { Id = 2, Isbn = "11111", Title = "Don Quijote de la Mancha", ReleaseYear = 1850, Description = "From Update 2" });
 
 void SaveOne()
 {
@@ -61,7 +67,7 @@ void FindFirst()
     var context = new AppDbContextFactory().CreateDbContext(null);
     Console.WriteLine("============= Find first =============");
     //context.Books.First(b => b.Id == 1);
-    var book = context.Books.First();
+    Book book = context.Books.First();
     Console.WriteLine(book);  
 }
 
@@ -69,6 +75,55 @@ void FindSecond()
 {
     var context = new AppDbContextFactory().CreateDbContext(null);
     Console.WriteLine("============= Find second =============");
-    var book = context.Books.First(b => b.Id == 2);
+    Book book = context.Books.First(b => b.Id == 1);
     Console.WriteLine(book);
+}
+
+void FindById(int id)
+{
+    var context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Find by Id = {id} =============");
+    Book book = context.Books.Find(1);
+    Console.WriteLine(book);
+}
+
+void Count()
+{
+    var context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Count =============");
+    int rows = context.Books.Count();
+    Console.WriteLine($"Total books: {rows}");
+}
+
+void Update()
+{
+    var context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Update =============");
+    Book bookParam = new Book { Id = 1, Description = "Some Other description from Update." };
+    Book book = context.Books.Find(bookParam.Id);
+    Console.WriteLine("Before Update: " + book);
+    book.Description = bookParam.Description;
+    context.Books.Update(book);
+
+    context.SaveChanges();
+    Console.WriteLine("After Update: " + book);
+}
+
+void Update2(Book bookParam)
+{
+    AppDbContext context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Update 2 =============");
+    
+    context.Books.Update(bookParam);
+
+    context.SaveChanges();
+    bookParam = context.Books.Find(2);
+    Console.WriteLine("After Update: " + bookParam);
+}
+
+void GetAll()
+{
+    var context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Count =============");
+    //List<Books> all = context.Books.SelectMany(b => b.Id == 3 && b.Id == 2);
 }

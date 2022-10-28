@@ -8,13 +8,17 @@ Console.WriteLine("Welcome");
 
 //IsbnValidationsSuccessl();
 
-FindFirst();
+/*FindFirst();
 FindSecond();
-FindById(3);
+FindById(1);*/
 Count();
-Update() ;
-Update2(new Book { Id = 2, Isbn = "11111", Title = "Don Quijote de la Mancha", ReleaseYear = 1850, Description = "From Update 2" });
-UpdateMulti();
+//Update() ;
+//Update2(new Book { Id = 2, Isbn = "11111", Title = "Don Quijote de la Mancha", ReleaseYear = 1850, Description = "From Update 2" });
+//UpdateMulti();
+//Remove();
+//RemoveRange();
+//FindByTitle("Torrente");
+//FindByTitle("123");
 
 void SaveOne()
 {
@@ -136,6 +140,53 @@ void UpdateMulti()
     Console.WriteLine("After Update: " + book2);
     Book book5 = context.Books.Find(3);
     Console.WriteLine("After Update: " + book5);
+
+}
+
+void Remove()
+{
+    AppDbContext context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Delete  =============");
+    Book book = context.Books.Find(3);
+    if (book != null)
+    {
+        Console.WriteLine("Book doesn't exist");
+        return;
+    }
+    context.Books.Remove(book);
+    long before = context.Books.Count();
+    context.SaveChanges();
+    long after = context.Books.Count();
+    Console.WriteLine(after == before - 1? "Book deleted" : "No books deleted");
+}
+
+void RemoveRange()
+{
+    Console.WriteLine($"============= Delete Range (2,3)  =============");
+    AppDbContext context = new AppDbContextFactory().CreateDbContext(null);
+    Book book3 = context.Books.Find(2);
+    Book book4 = context.Books.Find(3);
+    List<Book> books = new List<Book>() { book3, book4 };
+    context.Books.RemoveRange(books);
+    long before = context.Books.Count();
+    context.SaveChanges(); 
+    long after = context.Books.Count();
+    Console.WriteLine(before > after ? "Books deleted " + (before - after) + " books deleted" : "No books deleted");
+}
+
+void FindByTitle(string title)
+{
+    AppDbContext context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Find by title  =============");
+    List<Book> books = context.Books
+        .Where(book => book.Title.ToLower().Equals(title.ToLower()))
+        .ToList();
+    Book book = context.Books
+        .Where(book => book.Title.ToLower().Equals(title.ToLower()))
+        .First();
+    Console.WriteLine("Books: "+ string.Join(" ,", books));
+    Console.WriteLine("Single book: " + book);
+
 
 }
 

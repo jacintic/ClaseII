@@ -14,6 +14,7 @@ FindById(3);
 Count();
 Update() ;
 Update2(new Book { Id = 2, Isbn = "11111", Title = "Don Quijote de la Mancha", ReleaseYear = 1850, Description = "From Update 2" });
+UpdateMulti();
 
 void SaveOne()
 {
@@ -112,13 +113,30 @@ void Update()
 void Update2(Book bookParam)
 {
     AppDbContext context = new AppDbContextFactory().CreateDbContext(null);
-    Console.WriteLine($"============= Update 2 =============");
+    Console.WriteLine($"============= Update 2 (book param) =============");
     
     context.Books.Update(bookParam);
 
     context.SaveChanges();
     bookParam = context.Books.Find(2);
     Console.WriteLine("After Update: " + bookParam);
+}
+
+void UpdateMulti()
+{
+    AppDbContext context = new AppDbContextFactory().CreateDbContext(null);
+    Console.WriteLine($"============= Update 3 (multiple)  =============");
+    Book book3 = new Book { Id = 2, Isbn = "11113", Title = "The Ender's Game- Update", ReleaseYear = 1854, Description = "asdasd" };
+    Book book4 = new Book { Id = 3, Isbn = "11114", Title = "Matrix - Update", ReleaseYear = 1853, Description = "asdasd" };
+    List<Book> books = new List<Book>() { book3, book4 };
+    context.Books.UpdateRange(books);
+
+    context.SaveChanges();
+    Book book2 = context.Books.Find(2);
+    Console.WriteLine("After Update: " + book2);
+    Book book5 = context.Books.Find(3);
+    Console.WriteLine("After Update: " + book5);
+
 }
 
 void GetAll()

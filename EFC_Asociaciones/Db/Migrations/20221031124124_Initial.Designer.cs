@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFC_Asociaciones.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221031121548_Initial")]
+    [Migration("20221031124124_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,9 @@ namespace EFC_Asociaciones.Db.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
+                    b.Property<int>("AuthorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -112,6 +115,8 @@ namespace EFC_Asociaciones.Db.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.ToTable("Books");
                 });
 
@@ -124,6 +129,17 @@ namespace EFC_Asociaciones.Db.Migrations
                         .IsRequired();
 
                     b.Navigation("Address");
+                });
+
+            modelBuilder.Entity("EFC_Asociaciones.Models.Book", b =>
+                {
+                    b.HasOne("EFC_Asociaciones.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
                 });
 #pragma warning restore 612, 618
         }

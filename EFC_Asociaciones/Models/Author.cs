@@ -29,11 +29,13 @@ public class Author
     // associations
     public Address Address { get; set; }
 
+    public int AddressId { get; set; }
+
     // consturctor
     // methods
     // tostring
     public override string ToString()
     {
-        return $"Id: {Id}, FullName: {FullName}, Email: {Email}, Salary: {Salary}, Birth Date: {BirthDate}";
+        return $"Id: {Id}, FullName: {FullName}, Email: {Email}, Salary: {Salary}, Birth Date: {BirthDate} \n Address: {Address}";
     }
 }

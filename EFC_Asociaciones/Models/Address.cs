@@ -14,5 +14,11 @@ public class Address
     Order = 0)] // defining table column attributes
     public int Id { get; set; }
     public string Street { get; set; }
-    public string City { get; set; }    
+    public string City { get; set; }
+
+    // to string
+    public override string ToString()
+    {
+        return $"Id: {Id}, Street: {Street}, City: {City}";
+    }
 }

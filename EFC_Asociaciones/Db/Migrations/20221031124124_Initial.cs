@@ -31,26 +31,6 @@ namespace EFC_Asociaciones.Db.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Books",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    isbn = table.Column<string>(type: "varchar(6)", maxLength: 6, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    release_year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
-                    description = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Books", x => x.id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "author",
                 columns: table => new
                 {
@@ -76,19 +56,51 @@ namespace EFC_Asociaciones.Db.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    isbn = table.Column<string>(type: "varchar(6)", maxLength: 6, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    release_year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
+                    description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AuthorId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Books_author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "author",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_author_AddressId",
                 table: "author",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_AuthorId",
+                table: "Books",
+                column: "AuthorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "author");
+                name: "Books");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "author");
 
             migrationBuilder.DropTable(
                 name: "addresses");

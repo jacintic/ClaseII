@@ -29,6 +29,8 @@ public class Book
     [Column("description")]
     public string Description { get; set; }
     // associations
+    public Author Author { get; set; }
+    public int AuthorId { get; set; }
     // consturctor
     // methods
     // tostring

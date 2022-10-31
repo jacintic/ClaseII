@@ -12,7 +12,17 @@ public interface IAuthorRepository
 
     List<Author> FindAll();
 
+    Author FindByEmail(string email);
+
+    List<Author> FindByEmailContains(string email);
+
     List<Author> FindSalGreaterThan(decimal sal);
+
+    Author Create(Author author);
+
+    Author Update(Author author);
+
+    bool Remove(int id);
 
 
 }

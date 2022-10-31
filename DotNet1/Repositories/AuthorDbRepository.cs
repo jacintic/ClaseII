@@ -30,10 +30,62 @@ public class AuthorDbRepository : IAuthorRepository
         return Context.Authors.ToList();
     }
 
-    public List<Author> FindSalGreaterThan(decimal sal) 
+    public Author FindByEmail(string email)
+    {
+        return Context.Authors
+                    .Where(
+                        author => author.Email.ToLower().Equals(email.ToLower()))
+                    .FirstOrDefault(); // first or default avoids unhandled exception,
+                                       // returns null if not found
+    }
+
+    public List<Author> FindByEmailContains(string email)
+    {
+        return Context.Authors
+                .Where(a => EF.Functions.Like(a.Email.ToLower(), $"%{email.ToLower()}%")).ToList();
+    }
+
+        public List<Author> FindSalGreaterThan(decimal sal) 
     {
         return Context.Authors
         .Where(author => author.Salary > sal)
         .ToList();
+    }
+
+    public Author Create(Author author)
+    {
+        // Si tiene id asignado entonces es un update y no creamos
+        if (author.Id > 0)
+            return Update(author);
+        Context.Authors.Add(author);
+        Context.SaveChanges();
+        return author;
+    }
+
+    public Author Update(Author author)
+    {
+        if (author.Id == 0)
+            return Create(author);
+        Author authorEntity = FindById(author.Id);
+        if (authorEntity == null)
+            return null;
+        authorEntity.Email = author.Email;
+        authorEntity.FullName = author.FullName;
+        authorEntity.Salary = author.Salary;
+
+        Context.Authors.Update(authorEntity);
+
+        Context.SaveChanges();
+
+        return authorEntity;
+    }
+
+    public bool Remove(int id)
+    {
+        Author authToDelete = FindById(id);
+        if (authToDelete == null)
+            return false;
+        Context.Authors.Remove(authToDelete);
+        return true;
     }
 }

@@ -29,8 +29,17 @@ Console.WriteLine("AuthList:\n" + string.Join("\n", authorRepo.FindAll()));
 
 Console.WriteLine("Auth sal greater than 1200.30: \n" + string.Join("\n", authorRepo.FindSalGreaterThan((decimal)1200.30)));
 
+Console.WriteLine("Auth find by email:\n" + authorRepo.FindByEmail("A@B.com"));
+// controlar excepciones y caso de email no existente con try catch (first())   
+
+Console.WriteLine("Auth find by email contains:\n" + string.Join("\n", authorRepo.FindByEmailContains("com")));
 
 
+
+/*Author authAdded = new Author { Email = "gumersindo@gmail.com", FullName = "Gumersindo Perez", Salary = (decimal)3750.75, BirthDate = new DateTime(
+        1975, 08, 15, 10, 30, 45) };
+Console.WriteLine("Auth create:\n" + authorRepo.Create(authAdded));
+*/
 void SaveOne()
 {
     var context = new AppDbContextFactory().CreateDbContext(null);

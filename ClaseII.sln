@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "POO1", "POO1\POO1.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asociaciones", "Asociaciones\Asociaciones.csproj", "{E4B1F828-4EDD-43F8-A5CA-0664D9E8405C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNet1", "DotNet1\DotNet1.csproj", "{B4BD4E08-3DA8-44EE-A561-74FBD531EEAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet1", "DotNet1\DotNet1.csproj", "{B4BD4E08-3DA8-44EE-A561-74FBD531EEAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC_Asociaciones", "EFC_Asociaciones\EFC_Asociaciones.csproj", "{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{B4BD4E08-3DA8-44EE-A561-74FBD531EEAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4BD4E08-3DA8-44EE-A561-74FBD531EEAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4BD4E08-3DA8-44EE-A561-74FBD531EEAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

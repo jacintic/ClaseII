@@ -40,6 +40,22 @@ Console.WriteLine("Auth find by email contains:\n" + string.Join("\n", authorRep
         1975, 08, 15, 10, 30, 45) };
 Console.WriteLine("Auth create:\n" + authorRepo.Create(authAdded));
 */
+
+Console.WriteLine("======== Update ========");
+Author auth1 = authorRepo.FindById(1);
+auth1.Email = "auth1@email.com";
+auth1.FullName = "Auth 1 edited";
+auth1.Salary = 5000;
+auth1.BirthDate = new DateTime(1977,05,12);
+
+Console.WriteLine(authorRepo.Update(auth1));
+
+
+Console.WriteLine("======== Delete ========");
+
+Console.WriteLine(authorRepo.Remove(3));
+
+
 void SaveOne()
 {
     var context = new AppDbContextFactory().CreateDbContext(null);

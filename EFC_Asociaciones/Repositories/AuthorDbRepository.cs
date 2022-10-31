@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DotNet1.Repositories;
+namespace EFC_Asociaciones.Repositories;
 
 public class AuthorDbRepository : IAuthorRepository
 {

@@ -63,7 +63,7 @@ namespace EFC_Asociaciones.Db.Migrations
                         .HasColumnName("id")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("BirthDate")
@@ -101,7 +101,7 @@ namespace EFC_Asociaciones.Db.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -176,9 +176,7 @@ namespace EFC_Asociaciones.Db.Migrations
                 {
                     b.HasOne("EFC_Asociaciones.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.Navigation("Address");
                 });
@@ -187,9 +185,7 @@ namespace EFC_Asociaciones.Db.Migrations
                 {
                     b.HasOne("EFC_Asociaciones.Models.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("Author");
                 });

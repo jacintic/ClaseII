@@ -141,3 +141,11 @@ Console.WriteLine(String.Join(", ",bookFromDb2.Categories));
 foreach(var category in bookFromDb2.Categories)
     Console.WriteLine("Category name: " + category.Name);
 
+
+////////////////////////////////
+//////// BOOK REPO /////////////
+////////////////////////////////
+
+Console.WriteLine("=====================");
+Console.WriteLine("===== Book Repo =====");
+Console.WriteLine("=====================");

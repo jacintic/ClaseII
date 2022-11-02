@@ -58,7 +58,7 @@ namespace EFC_Asociaciones.Db.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     salary = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: false),
                     birth_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    AddressId = table.Column<int>(type: "int", nullable: false)
+                    AddressId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -67,8 +67,7 @@ namespace EFC_Asociaciones.Db.Migrations
                         name: "FK_author_addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "addresses",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -85,7 +84,7 @@ namespace EFC_Asociaciones.Db.Migrations
                     release_year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
                     description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    AuthorId = table.Column<int>(type: "int", nullable: false)
+                    AuthorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,8 +93,7 @@ namespace EFC_Asociaciones.Db.Migrations
                         name: "FK_Books_author_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "author",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

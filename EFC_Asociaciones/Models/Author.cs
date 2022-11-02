@@ -30,7 +30,7 @@ public class Author
     // One To One
     public Address Address { get; set; }
 
-    public int AddressId { get; set; }
+    public int? AddressId { get; set; }
 
     // One To Many
     public List<Book> Books { get; set; }

@@ -1,11 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace EFC_Asociaciones.Repositories;
 
 public interface IBookRepository
 {
+
+    // buscar por Id
+    Book FindById(int id);
+
+    // buscar por Id incluyendo asociaciones: Author y Categories
+    Book FindByIdWithAssociations(int id);
+
+    // buscar por otro titulo que incluya el termino de busqueda
+    List<Book> FindByTitleContains(string title);
+
+    // buscar por precio menor que
+    List<Book> FindByPriceLowerThan(double price);
+
+    // obtener todos
+    List<Book> FindAll();
+
+    // guardar
+    bool Create(Book book);
+
+    // actualizar restringiendo campos
+    bool Update(Book book);
+
+    // borrar
+    bool Delete(int id); 
+
+
 }

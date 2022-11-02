@@ -30,7 +30,8 @@ public class Book
     public string Description { get; set; }
     // associations
     public Author Author { get; set; }
-    public int AuthorId { get; set; }
+    public int? AuthorId { get; set; }  // autor opcional
+                                        // requiere nueva migración
 
     // association Many To many with Category
     public IList<Category> Categories { get; set; }

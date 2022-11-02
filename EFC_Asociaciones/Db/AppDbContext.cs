@@ -9,7 +9,7 @@ public class AppDbContext : DbContext
 
     public DbSet<Address> Address { get; set; }
 
-    public DbSet<Category> Category { get; set; }
+    public DbSet<Category> Categories { get; set; }
     // add a DbSet for every model we have
     public AppDbContext(DbContextOptions options) : base(options)
     {

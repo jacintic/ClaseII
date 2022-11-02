@@ -138,4 +138,6 @@ var category1FromDb = dbContext.Categories.Find(1);
 var bookFromDb2 = dbContext.Books.Include(b => b.Categories).Where(b => b.Id == 4).FirstOrDefault();
 Console.WriteLine(bookFromDb2);
 Console.WriteLine(String.Join(", ",bookFromDb2.Categories));
+foreach(var category in bookFromDb2.Categories)
+    Console.WriteLine("Category name: " + category.Name);
 

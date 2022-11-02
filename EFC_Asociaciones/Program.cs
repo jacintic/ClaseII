@@ -14,7 +14,7 @@ auth1.BirthDate = new DateTime(1977, 05, 12);
 auth1.Address = address1;
 Console.WriteLine(authorRepo.Create(auth1));
 
-Console.WriteLine("========== One To Many ==========");
+Console.WriteLine("========== Many To One ==========");
 Book book1 = new Book
 {
     Title = "book1",
@@ -43,7 +43,28 @@ Book book3 = new Book
 dbContext.Books.AddRange(book1, book2, book3);
 dbContext.SaveChanges();
 
+Book book1FromDb = dbContext.Books.Find(1);
+// Console.WriteLine(book1FromDb.Author.FullName); // no lo trae, error
+// alternativa
+// usar ID para traer objeto
+Console.WriteLine(dbContext.Authors.Find(book1FromDb.AuthorId));
+
+Console.WriteLine("========== Many To One ==========");
+// Author -> Books (One To Many)
+auth1 = dbContext.Authors.Find(3);
+/*foreach (Book book in auth1.Books)
+    Console.WriteLine(book.Title);
+
+*/  // NO FUNCA por que no hace un Eager the auth1.Books
+Console.WriteLine("Printing books from Author with Id = 3");
+var booksFromAuth1 = dbContext.Books.Where(b => b.AuthorId == auth1.Id).ToList();
+Console.WriteLine(String.Join("\n", booksFromAuth1));
+
+
+
 Console.WriteLine("========== Many To Many ==========");
+
+
 
 
 

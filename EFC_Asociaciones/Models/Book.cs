@@ -31,6 +31,9 @@ public class Book
     // associations
     public Author Author { get; set; }
     public int AuthorId { get; set; }
+
+    // association Many To many with Category
+    public IList<Category> Categories { get; set; }
     // consturctor
     // methods
     // tostring

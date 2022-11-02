@@ -51,7 +51,7 @@ Console.WriteLine(dbContext.Authors.Find(book1FromDb.AuthorId));
 
 Console.WriteLine("========== Many To One ==========");
 // Author -> Books (One To Many)
-auth1 = dbContext.Authors.Find(3);
+auth1 = dbContext.Authors.Find(1);
 /*foreach (Book book in auth1.Books)
     Console.WriteLine(book.Title);
 

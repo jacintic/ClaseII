@@ -22,4 +22,7 @@ public class Category
     TypeName = "int",
     Order = 2)]
     public int MinAge { get; set; }
+
+    // association Many To Many with Book
+    public IList<Book> Books { get; set; }
 }

@@ -31,6 +31,22 @@ namespace EFC_Asociaciones.Db.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "category",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    name = table.Column<string>(type: "varchar(100)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    min_age = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_category", x => x.id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "author",
                 columns: table => new
                 {
@@ -83,10 +99,40 @@ namespace EFC_Asociaciones.Db.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "BookCategory",
+                columns: table => new
+                {
+                    BooksId = table.Column<int>(type: "int", nullable: false),
+                    CategoriesId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BookCategory", x => new { x.BooksId, x.CategoriesId });
+                    table.ForeignKey(
+                        name: "FK_BookCategory_Books_BooksId",
+                        column: x => x.BooksId,
+                        principalTable: "Books",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_BookCategory_category_CategoriesId",
+                        column: x => x.CategoriesId,
+                        principalTable: "category",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_author_AddressId",
                 table: "author",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BookCategory_CategoriesId",
+                table: "BookCategory",
+                column: "CategoriesId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Books_AuthorId",
@@ -97,7 +143,13 @@ namespace EFC_Asociaciones.Db.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "BookCategory");
+
+            migrationBuilder.DropTable(
                 name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "category");
 
             migrationBuilder.DropTable(
                 name: "author");

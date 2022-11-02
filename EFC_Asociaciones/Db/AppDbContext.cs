@@ -8,6 +8,8 @@ public class AppDbContext : DbContext
     public DbSet<Author> Authors { get; set; }
 
     public DbSet<Address> Address { get; set; }
+
+    public DbSet<Category> Category { get; set; }
     // add a DbSet for every model we have
     public AppDbContext(DbContextOptions options) : base(options)
     {

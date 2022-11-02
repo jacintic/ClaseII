@@ -25,4 +25,10 @@ public class Category
 
     // association Many To Many with Book
     public IList<Book> Books { get; set; }
+
+    // ToString
+    public override string ToString()
+    {
+        return $"Id: {Id}, Name: {Name}, Minimum Age: {MinAge}";
+    }
 }

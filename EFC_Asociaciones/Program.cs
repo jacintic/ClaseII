@@ -56,11 +56,13 @@ auth1 = dbContext.Authors.Find(1);
     Console.WriteLine(book.Title);
 
 */  // NO FUNCA por que no hace un Eager the auth1.Books
+
+/*
 Console.WriteLine("Printing books from Author with Id = 3");
 var booksFromAuth1 = dbContext.Books.Where(b => b.AuthorId == auth1.Id).ToList();
 Console.WriteLine(String.Join("\n", booksFromAuth1));
 
-
+*/
 
 Console.WriteLine("========== Many To Many ==========");
 
@@ -128,3 +130,12 @@ dbContext.Books.AddRange(book4, book5, book6, book7, book8);
 dbContext.SaveChanges();
 
 // recuperar objetos de la DB
+
+var bookFromDb = dbContext.Books.Find(4);
+var category1FromDb = dbContext.Categories.Find(1);
+
+// find book 4 include categories
+var bookFromDb2 = dbContext.Books.Include(b => b.Categories).Where(b => b.Id == 4).FirstOrDefault();
+Console.WriteLine(bookFromDb2);
+Console.WriteLine(String.Join(", ",bookFromDb2.Categories));
+

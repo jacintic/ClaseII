@@ -20,10 +20,10 @@ public interface IBookRepository
     List<Book> FindAll();
 
     // guardar
-    bool Create(Book book);
+    Book Create(Book book);
 
     // actualizar restringiendo campos
-    bool Update(Book book);
+    Book Update(Book book);
 
     // borrar
     bool Delete(int id); 

@@ -71,6 +71,7 @@ public class BookDbRepository : IBookRepository
         Context.Books.Attach(book);
         Context.Entry(book).Property(b => b.Title).IsModified = true;
         Context.Entry(book).Property(b => b.AuthorId).IsModified = true;
+        Context.Entry(book).Property(b => b.Categories).IsModified = true;
 
         Context.SaveChanges();
 

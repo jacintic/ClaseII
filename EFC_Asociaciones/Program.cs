@@ -30,7 +30,7 @@ var cat2 = new Category { Name = "cat2", MinAge = 18 };
 var cat3 = new Category { Name = "cat3", MinAge = 9 };
 
 // Author
-var aut1 = new Author { FullName = "Manolin Perez", Email = "a@b.com", Salary = (decimal)3500.50, BirthDate = new DateTime(1975,08,15) };
+var aut1 = new Author { FullName = "Manolin Perez", Email = "a@b.com", Salary = (decimal)3500.50, BirthDate = new DateTime(1975, 08, 15) };
 var aut2 = new Author { FullName = "Francisco Garcia", Email = "c@d.com", Salary = (decimal)1500.50, BirthDate = DateTime.Now };
 var aut3 = new Author { FullName = "Pedro Megia", Email = "p@m.com", Salary = (decimal)2000.50, BirthDate = DateTime.Now };
 
@@ -61,6 +61,7 @@ book4.Categories = new List<Category> { cat2, cat3 };
 
 // guardar
 //authorRepoII.Create();
+/*
 addressRepositoryII.Create(address21);
 addressRepositoryII.Create(address22);
 
@@ -76,8 +77,22 @@ bookRepoII.Create(book1);
 bookRepoII.Create(book2);
 bookRepoII.Create(book3);
 bookRepoII.Create(book4);
+*/
 
-// actualizar
+// actualizar // nota, toma la Id como referencia
+var book5 = new Book {Id = 1, Title = "T1 Update", Description = "b1 update", Isbn = "1 update", ReleaseYear = 2021, AuthorId = 1 };
+bookRepoII.Update(book5);
+
+// desasociar/ actualizar relaccion autor a book
+book5.AuthorId = null;
+bookRepoII.Update(book5);
+
+
+// desasociar/ actualizar relaccion book a categories (Many To Many)
+var book1FromDb = bookRepoII.FindByIdWithAssociations(1);
+//book1FromDb.Categories.Clear();
+//bookRepoII.Update(book1FromDb);
+
 
 // busquedas
 

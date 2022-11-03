@@ -96,8 +96,14 @@ var book1FromDbWithAsscoiations = bookRepoII.FindByIdWithAssociations(1);
 //bookRepoII.Update(book1FromDbWithAsscoiations);
 
 // // adding an existing category
-Category cat1FromDb = categoryRepoII.FindById(1);
+/*Category cat1FromDb = categoryRepoII.FindById(1);
 book1FromDbWithAsscoiations.Categories.Add(cat1FromDb);
+bookRepoII.Update(book1FromDbWithAsscoiations);
+*/
+
+
+// // clear
+book1FromDbWithAsscoiations.Categories.Clear();
 bookRepoII.Update(book1FromDbWithAsscoiations);
 
 // busquedas

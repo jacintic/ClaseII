@@ -78,7 +78,7 @@ bookRepoII.Create(book2);
 bookRepoII.Create(book3);
 bookRepoII.Create(book4);
 */
-
+/*
 // actualizar // nota, toma la Id como referencia
 var book5 = new Book {Id = 1, Title = "T1 Update", Description = "b1 update", Isbn = "1 update", ReleaseYear = 2021, AuthorId = 1 };
 bookRepoII.Update(book5);
@@ -86,12 +86,15 @@ bookRepoII.Update(book5);
 // desasociar/ actualizar relaccion autor a book
 book5.AuthorId = null;
 bookRepoII.Update(book5);
-
+*/
 
 // desasociar/ actualizar relaccion book a categories (Many To Many)
-var book1FromDb = bookRepoII.FindByIdWithAssociations(1);
-//book1FromDb.Categories.Clear();
-//bookRepoII.Update(book1FromDb);
+//Category cat5 = new Category { Name = "cat5", MinAge = 7 };
+var book1FromDbWithAsscoiations = bookRepoII.FindByIdWithAssociations(1);
+//book1FromDbWithAsscoiations.Categories.Add(cat5);
+book1FromDbWithAsscoiations.Categories.RemoveAt(0);
+bookRepoII.Update(book1FromDbWithAsscoiations);
+
 
 
 // busquedas

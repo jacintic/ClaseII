@@ -16,6 +16,9 @@ public interface IBookRepository
     // buscar por precio menor que
     List<Book> FindByPriceLowerThan(double price);
 
+    // buscar libros por ID de author
+    List<Book> FindByAuthorId(int id);
+
     // obtener todos
     List<Book> FindAll();
 

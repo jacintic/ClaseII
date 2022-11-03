@@ -14,6 +14,8 @@ public interface IAddressRepository
     // guardar
     Address Create(Address address);
 
+    bool RemoveById(int id);
+
 
 
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EFC_Asociaciones.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,5 +33,16 @@ public class AddressDbRepository : IAddressRepository
         Context.SaveChanges();
         return address;
     }
+
+    public bool RemoveById(int id)
+    {
+        Address address = FindById(id);
+        if (address == null)
+            return false;
+        Context.Address.Remove(address);
+        Context.SaveChanges();
+        return true;
+    }
+
 
 }

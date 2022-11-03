@@ -4,6 +4,8 @@
 //////// BOOK REPO /////////////
 ////////////////////////////////
 
+using EFC_Asociaciones.Models;
+
 Console.WriteLine("=====================");
 Console.WriteLine("===== Book Repo =====");
 Console.WriteLine("=====================");
@@ -103,12 +105,45 @@ bookRepoII.Update(book1FromDbWithAsscoiations);
 
 
 // // clear
+/*
 book1FromDbWithAsscoiations.Categories.Clear();
 bookRepoII.Update(book1FromDbWithAsscoiations);
+*/
+// // add many
+
+
 
 // busquedas
 
 // borrar
+// // borrar una instancia de una entidad de la BBDD
+// // /// what happens when we delete an entity referenced by other entities? (book author, delete author)
+// // // // you have to remove the reference first then the referenced
+
+
+// 1. buscar libros de aut1
+var booksFromAuth1 = bookRepoII.FindByAuthorId(2);
+// 2. desasociar autor de libros
+foreach (Book book in booksFromAuth1)
+{
+    book.AuthorId = null;
+    bookRepoII.Update(book);
+}
+// 2.2 desasociar address de autor
+var authorFromDb = authorRepoII.FindById(2);
+if (authorFromDb.AddressId != null)
+{
+    addressRepositoryII.RemoveById((int)authorFromDb.AddressId);
+}
+
+
+
+// borrar 1 autor
+authorRepoII.Remove(1);
+
+
+
+
 
 
 void GarbageCan()

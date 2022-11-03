@@ -31,6 +31,13 @@ public class BookDbRepository : IBookRepository
             .FirstOrDefault();
     }
 
+    public List<Book> FindByAuthorId(int id)
+    {
+        return Context.Books
+            .Where(b => b.AuthorId == id)
+            .ToList();
+    }
+
     public List<Book> FindAll()
     {
         return Context.Books.ToList();

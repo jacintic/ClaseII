@@ -92,10 +92,13 @@ bookRepoII.Update(book5);
 //Category cat5 = new Category { Name = "cat5", MinAge = 7 };
 var book1FromDbWithAsscoiations = bookRepoII.FindByIdWithAssociations(1);
 //book1FromDbWithAsscoiations.Categories.Add(cat5);
-book1FromDbWithAsscoiations.Categories.RemoveAt(0);
+//book1FromDbWithAsscoiations.Categories.RemoveAt(0);
+//bookRepoII.Update(book1FromDbWithAsscoiations);
+
+// // adding an existing category
+Category cat1FromDb = categoryRepoII.FindById(1);
+book1FromDbWithAsscoiations.Categories.Add(cat1FromDb);
 bookRepoII.Update(book1FromDbWithAsscoiations);
-
-
 
 // busquedas
 

@@ -120,7 +120,7 @@ bookRepoII.Update(book1FromDbWithAsscoiations);
 // // /// what happens when we delete an entity referenced by other entities? (book author, delete author)
 // // // // you have to remove the reference first then the referenced
 
-
+/*
 // 1. buscar libros de aut1
 var booksFromAuth1 = bookRepoII.FindByAuthorId(2);
 // 2. desasociar autor de libros
@@ -136,12 +136,10 @@ if (authorFromDb.AddressId != null)
     addressRepositoryII.RemoveById((int)authorFromDb.AddressId);
 }
 
-
-
 // borrar 1 autor
 authorRepoII.Remove(1);
 
-
+*/
 
 
 

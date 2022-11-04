@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Asociaciones", "Asociacione
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNet1", "DotNet1\DotNet1.csproj", "{B4BD4E08-3DA8-44EE-A561-74FBD531EEAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFC_Asociaciones", "EFC_Asociaciones\EFC_Asociaciones.csproj", "{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFC_Asociaciones", "EFC_Asociaciones\EFC_Asociaciones.csproj", "{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASPNET1", "ASPNET1\ASPNET1.csproj", "{2400C245-0B8A-49A8-9534-A2546A4EE1C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F22B92C0-E93E-4B07-ACCE-EA1EDCFE82D7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2400C245-0B8A-49A8-9534-A2546A4EE1C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2400C245-0B8A-49A8-9534-A2546A4EE1C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2400C245-0B8A-49A8-9534-A2546A4EE1C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2400C245-0B8A-49A8-9534-A2546A4EE1C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

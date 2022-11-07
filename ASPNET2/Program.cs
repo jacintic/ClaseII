@@ -8,7 +8,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // MYSQL connection
-
+// create MySQL DB setting
+string url = "server=localhost;port=3306;user=root;password=admin;database=aspnet";
+builder.Services.AddDbContext<AppDbContext>
+    (
+        options => options.UseMySql(url, ServerVersion.AutoDetect(url))
+    );
 
 var app = builder.Build();
 

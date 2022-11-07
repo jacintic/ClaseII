@@ -1,5 +1,6 @@
 ﻿namespace ASPNET2.Models;
 
+[Table("book")]
 public class Book
 {
     // attr
@@ -26,6 +27,10 @@ public class Book
     [Column("description")]
     public string Description { get; set; }
     // associations
+
+    public List<Category> Categories { get; set; }
+
+    public int AuthorId;
     // consturctor
     // methods
     // tostring

@@ -15,6 +15,13 @@ builder.Services.AddDbContext<AppDbContext>
         options => options.UseMySql(url, ServerVersion.AutoDetect(url))
     );
 
+// Add repos
+builder.Services.AddScoped<IAddressRepository, AddressDbRepository>();
+builder.Services.AddScoped<IBookRepository, BookDbRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryDbRepository>();
+builder.Services.AddScoped<IAuthorRepository, AuthorDbRepository>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ASPNET2.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ASPNET2.Controllers;
 
@@ -59,17 +60,14 @@ public class BookController
         return BookRepo.Update(book);
     }
 
-    /*
+    
 
     // delete
     // https://localhost:7230/api/books/1
     [HttpDelete("{id}")]
     public void DeleteById(int id)
     {
-        Book bookFormDb = FindById(id);
-        for (int i = 0; i < books.Count; i++)
-            if (books[i].Id == id)
-                books.RemoveAt(i);
+        BookRepo.Delete(id);
 
-    }*/
+    }
 }

@@ -27,6 +27,7 @@ public class BookDbRepository : IBookRepository
         return 
             Context.Books
             .Include(b => b.Categories)
+            .Include(b => b.Author)
             .Where(b => b.Id == id)
             .FirstOrDefault();
     }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
 
 namespace ASPNET2.Models;
@@ -23,12 +24,9 @@ public class Category
     Order = 2)]
     public int MinAge { get; set; }
 
+    [JsonIgnore]
     // association Many To Many with Book
     public IList<Book> Books { get; set; }
 
-    // ToString
-    public override string ToString()
-    {
-        return $"Id: {Id}, Name: {Name}, Minimum Age: {MinAge}";
-    }
+    
 }

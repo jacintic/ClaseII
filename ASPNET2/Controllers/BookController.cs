@@ -22,12 +22,27 @@ public class BookController
         return BookRepo.FindById(id);
     }
 
+
     // https://localhost:7230/api/books/findall
     [HttpGet("findall")]
     public List<Book> FindAll()
     {
         return BookRepo.FindAll();
     }
+
+    // https://localhost:7230/api/books/title
+    [HttpGet("title/{title}")]
+    public List<Book> FindByTitleContains(string title)
+    {
+        return BookRepo.FindByTitleContains(title);
+    }
+
+    [HttpGet("include/{id}")]
+    public Book FindByIdWithAssociations(int id)
+    {
+        return BookRepo.FindByIdWithAssociations(id);
+    }
+
 
     // https://localhost:7230/api/books
     [HttpPost]

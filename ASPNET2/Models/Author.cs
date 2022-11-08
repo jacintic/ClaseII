@@ -25,6 +25,9 @@ public class Author
 
     [Column("birth_date")]
     public DateTime BirthDate { get; set; }
+
+    [JsonIgnore]
+    public ICollection<Book> Books;
     
     // associations
     // consturctor

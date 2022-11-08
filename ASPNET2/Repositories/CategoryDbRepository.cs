@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ASPNET2.Repositories
@@ -25,7 +26,6 @@ namespace ASPNET2.Repositories
             return Context.Categories.ToList();
         }
 
-        
         public Category Create(Category category)
         {
             Context.Categories.Add(category);

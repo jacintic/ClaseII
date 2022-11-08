@@ -33,26 +33,6 @@ namespace ASPNET2.Db.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "book",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    isbn = table.Column<string>(type: "varchar(6)", maxLength: 6, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    release_year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
-                    description = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_book", x => x.id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "category",
                 columns: table => new
                 {
@@ -93,6 +73,32 @@ namespace ASPNET2.Db.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "book",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    isbn = table.Column<string>(type: "varchar(6)", maxLength: 6, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    release_year = table.Column<int>(type: "int", maxLength: 4, nullable: false),
+                    description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AuthorId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_book", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_book_author_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "author",
+                        principalColumn: "id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "BookCategory",
                 columns: table => new
                 {
@@ -123,6 +129,11 @@ namespace ASPNET2.Db.Migrations
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_book_AuthorId",
+                table: "book",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BookCategory_CategoriesId",
                 table: "BookCategory",
                 column: "CategoriesId");
@@ -137,13 +148,13 @@ namespace ASPNET2.Db.Migrations
                 name: "BookCategory");
 
             migrationBuilder.DropTable(
-                name: "author");
-
-            migrationBuilder.DropTable(
                 name: "book");
 
             migrationBuilder.DropTable(
                 name: "category");
+
+            migrationBuilder.DropTable(
+                name: "author");
         }
     }
 }

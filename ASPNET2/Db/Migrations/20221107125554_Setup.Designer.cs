@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNET2.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221107120054_Setup")]
+    [Migration("20221107125554_Setup")]
     partial class Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -88,6 +88,9 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id");
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -111,6 +114,8 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnName("title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("book");
                 });
@@ -161,6 +166,15 @@ namespace ASPNET2.Db.Migrations
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("ASPNET2.Models.Book", b =>
+                {
+                    b.HasOne("ASPNET2.Models.Author", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("Author");
                 });

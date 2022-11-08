@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASPNET2.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,13 +11,18 @@ public class AuthorDbRepository : IAuthorRepository
 {
     // attr
     private AppDbContext Context;
+    private IBookRepository BookRepo;
 
     // associations
 
     // constructor
-    public AuthorDbRepository(AppDbContext context)
+    public AuthorDbRepository(
+                                AppDbContext context,
+                                IBookRepository BookRepository
+                                )
     {
         Context = context;
+        BookRepo = BookRepository;
     }
 
     // find authro by id
@@ -53,10 +59,22 @@ public class AuthorDbRepository : IAuthorRepository
                 .ToList();
     }
 
+    public string FindNickName(int id)
+    {
+        return Context.Authors.Find(id).Email.Split("@")[0];
+    }
+
     public List<Author> FindSalGreaterThan(decimal sal) 
     {
         return Context.Authors
         .Where(author => author.Salary > sal)
+        .ToList();
+    }
+
+    public List<Author> FindBySalRange(double min, double max)
+    {
+        return Context.Authors
+        .Where(author => author.Salary >= (decimal)min && author.Salary <= (decimal)max)
         .ToList();
     }
 
@@ -74,7 +92,7 @@ public class AuthorDbRepository : IAuthorRepository
     {
         if (author.Id == 0)
             return Create(author);
-        Author authorEntity = FindById(author.Id);
+        /*Author authorEntity = FindById(author.Id);
         if (authorEntity == null)
             return null;
         authorEntity.Email = author.Email;
@@ -83,9 +101,25 @@ public class AuthorDbRepository : IAuthorRepository
 
         Context.Authors.Update(authorEntity);
 
+        Context.SaveChanges();*/
+
+        Context.Authors.Attach(author);
+        Context.Entry(author).Property(a => a.Email).IsModified = true;
+        Context.Entry(author).Property(a => a.FullName).IsModified = true;
+        //Context.Entry(book).Property(b => b.Categories).IsModified = true;
+        //Context.Entry(author).Property(a => a.Address).IsModified = true; // revisar
+
         Context.SaveChanges();
 
-        return authorEntity;
+
+
+
+        return author;
+
+
+
+
+
     }
 
     public bool Remove(int id)
@@ -94,6 +128,15 @@ public class AuthorDbRepository : IAuthorRepository
         if (authToDelete == null)
             return false;
         Context.Authors.Remove(authToDelete);
+        // TODO
+        // // deassociate books from author (set authorId = null)
+        List<Book> booksFromAuth = BookRepo.FindByAuthorId(id);
+        // no requiere un if count > 0
+        foreach (Book book in booksFromAuth)
+        {
+            book.AuthorId = null;
+            BookRepo.Update(book); // Note List<Book> update method required to optimize proccess
+        }
         Context.SaveChanges();
         return true;
     }

@@ -25,7 +25,7 @@ public class BookController
 
 
     // https://localhost:7230/api/books/findall
-    [HttpGet("findall")]
+    [HttpGet]
     public List<Book> FindAll()
     {
         return BookRepo.FindAll();

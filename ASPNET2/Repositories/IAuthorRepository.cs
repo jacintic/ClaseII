@@ -14,9 +14,13 @@ public interface IAuthorRepository
 
     Author FindByEmail(string email);
 
+    string FindNickName(int id);
+
     List<Author> FindByEmailContains(string email);
 
     List<Author> FindSalGreaterThan(decimal sal);
+
+    List<Author> FindBySalRange(double min, double max);
 
     Author Create(Author author);
 

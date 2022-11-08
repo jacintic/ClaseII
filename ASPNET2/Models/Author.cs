@@ -32,7 +32,7 @@ public class Author
     [JsonIgnore]
     public ICollection<Book> Books;
 
-    [JsonIgnore]
+    //[JsonIgnore]
     public Address? Address;
     public int? AddressId;
     // consturctor

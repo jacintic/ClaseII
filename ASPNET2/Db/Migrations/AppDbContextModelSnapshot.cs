@@ -96,12 +96,11 @@ namespace ASPNET2.Db.Migrations
 
                     b.Property<string>("Isbn")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("varchar(6)")
+                        .HasMaxLength(7)
+                        .HasColumnType("varchar(7)")
                         .HasColumnName("isbn");
 
                     b.Property<int>("ReleaseYear")
-                        .HasMaxLength(4)
                         .HasColumnType("int")
                         .HasColumnName("release_year");
 

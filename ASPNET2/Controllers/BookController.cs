@@ -51,21 +51,15 @@ public class BookController
         return BookRepo.Create(book);
     }
 
-    /*// update
+    // update
     // https://localhost:7230/api/books
     [HttpPut]
     public Book Update(Book book)
     {
-        Book bookFormDb = FindById(book.Id);
-        // comprobar si existe
-        if (bookFormDb is null)
-            return null;
-        // modificar
-        bookFormDb.Title = book.Title;
-        bookFormDb.Price = book.Price;
-        // sustituir el original por este
-        return book;
+        return BookRepo.Update(book);
     }
+
+    /*
 
     // delete
     // https://localhost:7230/api/books/1

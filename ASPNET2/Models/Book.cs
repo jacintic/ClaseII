@@ -16,19 +16,19 @@ public class Book
     [Required,
     Column("isbn"),
     MinLength(5),
-    MaxLength(6, ErrorMessage = "Title too long (50-)")]
+    MaxLength(7, ErrorMessage = "Title too long (50-)")]
     public string Isbn { get; set; }
 
+    
     [Required,
-    Column("release_year"),
-    MaxLength(4, ErrorMessage = "Year longer than 4 characters")]
+    Column("release_year")]
     public int ReleaseYear { get; set; }
 
     [Column("description")]
     public string Description { get; set; }
     // associations
 
-    public List<Category>? Categories { get; set; }
+    public IList<Category>? Categories { get; set; }
 
     public Author? Author { get; set; }
     public int? AuthorId { get; set; }

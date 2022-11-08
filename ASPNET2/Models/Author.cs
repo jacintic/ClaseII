@@ -26,10 +26,15 @@ public class Author
     [Column("birth_date")]
     public DateTime BirthDate { get; set; }
 
+
+
+    // associations
     [JsonIgnore]
     public ICollection<Book> Books;
-    
-    // associations
+
+    [JsonIgnore]
+    public Address? Address;
+    public int? AddressId;
     // consturctor
     // methods
     // tostring

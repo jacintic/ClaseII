@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNET2.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221107125554_Setup")]
+    [Migration("20221108093904_Setup")]
     partial class Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,12 +98,11 @@ namespace ASPNET2.Db.Migrations
 
                     b.Property<string>("Isbn")
                         .IsRequired()
-                        .HasMaxLength(6)
-                        .HasColumnType("varchar(6)")
+                        .HasMaxLength(7)
+                        .HasColumnType("varchar(7)")
                         .HasColumnName("isbn");
 
                     b.Property<int>("ReleaseYear")
-                        .HasMaxLength(4)
                         .HasColumnType("int")
                         .HasColumnName("release_year");
 

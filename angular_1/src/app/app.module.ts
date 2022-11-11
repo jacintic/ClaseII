@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
+// Http
+import { HttpClientModule } from '@angular/common/http';
+
 // material design modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -13,6 +16,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { RouterModule } from '@angular/router'
+
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import { RouterModule } from '@angular/router'
     MatIconModule,
     MatCardModule,
     MatDividerModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'book-list', pathMatch: 'full'},
       { path: 'book-list', component: BookListComponent },

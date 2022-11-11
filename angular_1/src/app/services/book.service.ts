@@ -1,0 +1,26 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Book } from '../models/book.model';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BookService {
+
+  url = 'http://localhost:7028/api/books';
+
+  constructor( private http: HttpClient) { }
+
+  // methods
+  findAll() {
+    return this.http.get<Book[]>(this.url);
+  }
+
+  findById( id: number) {
+    return this.http.get<Book>(`${this.url}/${id}`)
+  }
+
+  create() {
+
+  }
+}

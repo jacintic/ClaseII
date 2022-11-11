@@ -1,3 +1,8 @@
+<a routerLink="/book-list">Listado de libros</a>
+<a routerLink="/book-detail">Detalle de un libro</a>
+<router-outlet></router-outlet>
+
+
 <h1>Aplicación Angular</h1>
 <h3> Encabezado nivel 3</h3>
 <p>{{title}}</p>
@@ -40,9 +45,9 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="" color="primary">
-      
-        Delete <mat-icon>delete_forever</mat-icon>
-        See <mat-icon>visibility</mat-icon>
+
+      Delete <mat-icon>delete_forever</mat-icon>
+      See <mat-icon>visibility</mat-icon>
     </td>
   </ng-container>
 

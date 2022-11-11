@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNET2.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221108093904_Setup")]
+    [Migration("20221111103342_Setup")]
     partial class Setup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -1,6 +1,26 @@
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 // Add services to the container.
+
+// CORS
+builder.Services.AddCors(options => {
+    /*    options.AddPolicy("AllowAll", builder => {
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+
+        });*/
+    options.AddPolicy(name: "angular", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200", "http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
+// Other services
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,6 +42,8 @@ builder.Services.AddScoped<ICategoryRepository, CategoryDbRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorDbRepository>();
 
 
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -32,6 +54,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// CORS
+app.UseCors("angular");
 
 app.UseAuthorization();
 

@@ -1,7 +1,15 @@
+import { Timestamp } from "rxjs";
+
 export interface Book {
   id: number;
   title: string;
-  author: string;
-  price: number;
+  isbn?: string;
+  releaseYear?: number;
   description?: string;
+  price?: number;
+  // associations
+  categories?: any[];
+  author?: any;
+  // foreign keys
+  authorId?: number;
 }

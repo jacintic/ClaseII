@@ -7,7 +7,7 @@ import { Book } from '../models/book.model';
 })
 export class BookService {
 
-  url = 'http://localhost:7028/api/books';
+  url = 'https://localhost:7045/api/books';
 
   constructor( private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class BookService {
     return this.http.get<Book>(`${this.url}/${id}`)
   }
 
-  create() {
+ /* create() {
 
-  }
+  }*/
 }

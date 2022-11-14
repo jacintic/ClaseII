@@ -19,6 +19,8 @@ public class Book
     MaxLength(7, ErrorMessage = "Title too long (50-)")]
     public string Isbn { get; set; }
 
+    [Column("price")]
+    public decimal? Price { get; set; }
     
     [Required,
     Column("release_year")]

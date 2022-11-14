@@ -12,12 +12,16 @@ export class BookService {
   constructor( private http: HttpClient) { }
 
   // methods
-  findAll() {
+  findAll() { //  /api/books
     return this.http.get<Book[]>(this.url);
   }
 
-  findById( id: number) {
+  findById(id: number) {//  /api/books/1
     return this.http.get<Book>(`${this.url}/${id}`)
+  }
+
+  deleteById(id: number) {//  /api/books/1
+    return this.http.delete(`${this.url}/${id}`)
   }
 
  /* create() {

@@ -33,9 +33,9 @@ import { RouterModule } from '@angular/router'
     MatDividerModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'book-list', pathMatch: 'full'},
-      { path: 'book-list', component: BookListComponent },
-      { path: 'book-detail', component: BookDetailComponent }
+      { path: '', redirectTo: 'books', pathMatch: 'full'},
+      { path: 'books', component: BookListComponent },
+      { path: 'books/:id/detail', component: BookDetailComponent }
     ])
   ],
   providers: [],

@@ -5,14 +5,19 @@
     <td mat-cell *matCellDef="let book"> {{book.id}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="isbn">
+    <th mat-header-cell *matHeaderCellDef> ISBN </th>
+    <td mat-cell *matCellDef="let book"> {{book.isbn}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef> Title </th>
     <td mat-cell *matCellDef="let book"> {{book.title}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="author">
-    <th mat-header-cell *matHeaderCellDef> Author </th>
-    <td mat-cell *matCellDef="let book"> {{book.author}} </td>
+  <ng-container matColumnDef="releaseYear">
+    <th mat-header-cell *matHeaderCellDef> Release Year </th>
+    <td mat-cell *matCellDef="let book"> {{book.releaseYear}}€ </td>
   </ng-container>
 
   <ng-container matColumnDef="price">
@@ -22,10 +27,14 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
-    <td mat-cell *matCellDef="" color="primary">
+    <td mat-cell *matCellDef="let book" color="primary">
 
-      Delete <mat-icon>delete_forever</mat-icon>
-      See <mat-icon>visibility</mat-icon>
+      <button mat-icon-button color="primary" (click)="onDelete(book.id)">
+        Delete <mat-icon>delete_forever</mat-icon>
+      </button>
+      <button mat-icon-button color="primary"  [routerLink]="['/books', book.id, 'detail']">
+        See <mat-icon>visibility</mat-icon>
+      </button>
     </td>
   </ng-container>
 

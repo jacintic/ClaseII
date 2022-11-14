@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ASPNET2.Db.Migrations
 {
-    public partial class Setup : Migration
+    public partial class BookPrice : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -82,6 +82,7 @@ namespace ASPNET2.Db.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     isbn = table.Column<string>(type: "varchar(7)", maxLength: 7, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     release_year = table.Column<int>(type: "int", nullable: false),
                     description = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

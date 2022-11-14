@@ -100,6 +100,10 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("varchar(7)")
                         .HasColumnName("isbn");
 
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(65,30)")
+                        .HasColumnName("price");
+
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int")
                         .HasColumnName("release_year");

@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNET2.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221111103342_Setup")]
-    partial class Setup
+    [Migration("20221114082819_BookPrice")]
+    partial class BookPrice
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,6 +101,10 @@ namespace ASPNET2.Db.Migrations
                         .HasMaxLength(7)
                         .HasColumnType("varchar(7)")
                         .HasColumnName("isbn");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(65,30)")
+                        .HasColumnName("price");
 
                     b.Property<int>("ReleaseYear")
                         .HasColumnType("int")

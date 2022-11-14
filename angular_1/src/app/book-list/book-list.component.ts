@@ -11,11 +11,14 @@ export class BookListComponent implements OnInit {
 
   books: Book[] = [];
 
-  columnNames: string[] = ["id", "title", "author", "price", "actions"];
+  columnNames: string[] = ["id", "isbn", "title", "releaseYear", "price", "actions"];
 
   constructor(private service: BookService) { }
 
   ngOnInit(): void {
+    this.findAll()
+  }
+  private findAll() {
     this.service.findAll().subscribe(
       {
         next: books => this.books = books,
@@ -23,25 +26,12 @@ export class BookListComponent implements OnInit {
       }
     );
   }
-
-}
-/*
-  {
-    id: 1,
-    title: "The Lord of the Rings",
-    author: "Tolkien",
-    price: 100
-  },
-  {
-    id: 2,
-    title: ".NET fundamentals",
-    author: "John Smith",
-    price: 54.30
-  },
-  {
-    id: 3,
-    title: "C# Definitive Guide",
-    author: "Paco Jhonson",
-    price: 35.50
+  onDelete(id: number) {
+    this.service.deleteById(id).subscribe(
+      {
+        next: response => this.findAll(),
+        error: err => console.log(err)
+      }
+    );
   }
-];*/
+}

@@ -16,6 +16,10 @@ export class BookService {
     return this.http.get<Book[]>(this.url);
   }
 
+  findByIdWithInclude(id: number) {
+    return this.http.get<Book>(`${this.url}/include/${id}`)
+  }
+
   findById(id: number) {//  /api/books/1
     return this.http.get<Book>(`${this.url}/${id}`)
   }
@@ -23,6 +27,7 @@ export class BookService {
   deleteById(id: number) {//  /api/books/1
     return this.http.delete(`${this.url}/${id}`)
   }
+
 
  /* create() {
 

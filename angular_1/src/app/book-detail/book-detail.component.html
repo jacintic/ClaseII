@@ -35,7 +35,7 @@
 
   <mat-divider inset></mat-divider>
   <mat-card-actions>
-    <button mat-raised-button color="primary">Editar</button>
+    <button mat-raised-button color="primary" [routerLink]="['/books', book.id, 'edit']">Editar</button>
     <button mat-raised-button color="warn" (click)="onDelete(book.id)">Borrar</button>
     <button mat-raised-button routerLink="/books">Volver</button>
   </mat-card-actions>

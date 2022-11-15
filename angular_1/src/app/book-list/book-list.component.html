@@ -35,7 +35,7 @@
       <button mat-raised-button color="primary" [routerLink]="['/books', book.id, 'detail']">
         See <mat-icon>visibility</mat-icon>
       </button>
-      <button mat-raised-button color="accent" routerLink="/books/new">
+      <button mat-raised-button color="accent" [routerLink]="['/books', book.id, 'edit']">
         Edit <mat-icon>edit</mat-icon>
       </button>
       <button mat-raised-button color="warn" (click)="onDelete(book.id)">

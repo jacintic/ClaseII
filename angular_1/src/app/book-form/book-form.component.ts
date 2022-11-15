@@ -15,12 +15,29 @@ export class BookFormComponent implements OnInit {
 
   editForm = this.createFormGroup();
   error: boolean = false;
+  book: Book | undefined;
 
   constructor(
     private bookService: BookService,
-    private router: Router  ) { }
+    private router: Router,
+    private activatedRoute: ActivatedRoute  ) { }
 
   ngOnInit(): void {
+    // extract ID from ulr
+    this.activatedRoute.paramMap.subscribe({
+      next: pmap => {
+        let id = pmap.get("id");
+        if (id) {
+          console.log("Existe ID, es una actualización " + id)
+          this.fetchBookWithInc(Number(id))
+        }
+          
+      }
+    })
+    // 1. if there is ID, fetch from backend (book/id)
+      // 1. load book in form
+
+    // 2. no ID? do nothing
   }
 
   createFormGroup() {
@@ -62,5 +79,13 @@ export class BookFormComponent implements OnInit {
   private showError(err: any): void {
     this.error = true
     console.log(err)
+  }
+  // llama al backend con esa id
+  private fetchBookWithInc(id: string | number | null) {
+    this.bookService.findByIdWithInclude(Number(id)).subscribe({
+      next: bookFromBackend => this.book = bookFromBackend,
+      error: err => console.log(err)
+    }
+    );
   }
 }

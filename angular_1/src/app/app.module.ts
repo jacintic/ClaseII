@@ -48,7 +48,8 @@ import { BookFormComponent } from './book-form/book-form.component'
       { path: '', redirectTo: 'books', pathMatch: 'full'},
       { path: 'books', component: BookListComponent },
       { path: 'books/:id/detail', component: BookDetailComponent },
-      { path: 'books/new', component: BookFormComponent }
+      { path: 'books/new', component: BookFormComponent },
+      { path: 'books/:id/edit', component: BookFormComponent }
     ])
   ],
   providers: [],

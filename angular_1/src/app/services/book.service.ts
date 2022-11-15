@@ -29,7 +29,7 @@ export class BookService {
   }
 
 
- /* create() {
-
-  }*/
+ create(book: Book) {
+   return this.http.post(`${this.url}`, book)
+  }
 }

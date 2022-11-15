@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Book } from '../models/book.model';
+import { BookService } from '../services/book.service';
 
 
 @Component({
@@ -11,7 +13,7 @@ export class BookFormComponent implements OnInit {
 
   editForm = this.createFormGroup();
 
-  constructor() { }
+  constructor(private service: BookService,) { }
 
   ngOnInit(): void {
 
@@ -32,6 +34,20 @@ export class BookFormComponent implements OnInit {
 
   save() {
     // extraer los datos del formulario y enviarlos al backend cond BookService.create POST
-    console.log(this.editForm.get("title")?.value)
+    let book = {
+      isbn: this.editForm.get("isbn")?.value,
+      title: this.editForm.get("title")?.value,
+      description: this.editForm.get("description")?.value,
+      releaseYear: this.editForm.get("releaseYear")?.value,
+      price: this.editForm.get("price")?.value
+    } as Book
+    console.log(book)
+    // save to DB
+    this.service.create(book).subscribe(
+      {
+        next: response => console.log("yup!"),
+        error: err => console.log(err)
+      }
+    );
   }
 }

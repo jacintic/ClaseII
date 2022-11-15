@@ -27,11 +27,8 @@ export class BookFormComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe({
       next: pmap => {
         let id = pmap.get("id");
-        if (id) {
-          console.log("Existe ID, es una actualización " + id)
-          this.fetchBookWithInc(Number(id))
-        }
-          
+        if (id) 
+          this.fetchBookWithInc(Number(id)) 
       }
     })
     // 1. if there is ID, fetch from backend (book/id)

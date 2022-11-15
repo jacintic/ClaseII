@@ -11,3 +11,8 @@
 button {
   margin-right: 1rem !important;
 }
+mat-card {
+  border: solid 2px red;
+  color:red;
+  background: rgba(255,0,0,0.1)
+}

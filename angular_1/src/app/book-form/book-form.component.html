@@ -1,4 +1,8 @@
 <h2>Crear nuevo libro</h2>
+<mat-card *ngIf="error">
+  ERROR: Se ha productido un error, intentalo de nuevo mas tarde.
+</mat-card>
+
 <form class="example-form" [formGroup]="editForm" (ngSubmit)="save()">
 
   <mat-form-field class="example-full-width" appearance="fill">
@@ -27,5 +31,5 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">Guardar</button>
-  <button mat-raised-button color="warn">Cancelar</button>
+  <button mat-raised-button color="warn" routerLink="/books">Cancelar</button>
 </form>

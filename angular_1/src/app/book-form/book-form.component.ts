@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Book } from '../models/book.model';
 import { BookService } from '../services/book.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 @Component({
@@ -12,11 +14,13 @@ import { BookService } from '../services/book.service';
 export class BookFormComponent implements OnInit {
 
   editForm = this.createFormGroup();
+  error: boolean = false;
 
-  constructor(private service: BookService,) { }
+  constructor(
+    private bookService: BookService,
+    private router: Router  ) { }
 
   ngOnInit(): void {
-
   }
 
   createFormGroup() {
@@ -43,11 +47,20 @@ export class BookFormComponent implements OnInit {
     } as Book
     console.log(book)
     // save to DB
-    this.service.create(book).subscribe(
+    this.bookService.create(book).subscribe(
       {
-        next: response => console.log("yup!"),
-        error: err => console.log(err)
+        next: response => this.navigateToList(),
+        error: err => this.showError(err)
       }
     );
+  }
+
+  private navigateToList() {
+    this.router.navigate(["/books"]);
+  }
+
+  private showError(err: any): void {
+    this.error = true
+    console.log(err)
   }
 }

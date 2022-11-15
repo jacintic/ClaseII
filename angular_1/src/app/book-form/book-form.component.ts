@@ -21,9 +21,10 @@ export class BookFormComponent implements OnInit {
     return new FormGroup({
 
       //id: new FormControl(),
-      //isbn: new FormControl(),
+      isbn: new FormControl(),
       title: new FormControl(),
-      //releaseYear: new FormControl(),
+      description: new FormControl(),
+      releaseYear: new FormControl(),
       price: new FormControl(),
 
     });

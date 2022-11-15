@@ -11,6 +11,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input'
+import { ReactiveFormsModule } from '@angular/forms'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // components 
 import { BookListComponent } from './book-list/book-list.component';
@@ -27,17 +31,24 @@ import { BookFormComponent } from './book-form/book-form.component'
     BookFormComponent
   ],
   imports: [
-    BrowserModule,
+    // material design
     MatButtonModule,
     MatTableModule,
     MatIconModule,
     MatCardModule,
     MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    // angular
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
       { path: '', redirectTo: 'books', pathMatch: 'full'},
       { path: 'books', component: BookListComponent },
-      { path: 'books/:id/detail', component: BookDetailComponent }
+      { path: 'books/:id/detail', component: BookDetailComponent },
+      { path: 'books/new', component: BookFormComponent }
     ])
   ],
   providers: [],

@@ -1,1 +1,22 @@
-<p>book-form works!</p>
+<h2>Crear nuevo libro</h2>
+<form class="example-form" [formGroup]="editForm" (ngSubmit)="save()">
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Titulo</mat-label>
+    <input matInput placeholder="Don Quijote" formControlName="title">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Precio</mat-label>
+    <input matInput placeholder="9.99" type="number" formControlName="price">
+  </mat-form-field>
+
+  <!-- <mat-form-field class="example-full-width" appearance="fill">
+     <mat-label>Leave a comment</mat-label>
+     <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
+   </mat-form-field>-->
+
+
+  <button mat-raised-button color="primary" type="submit">Guardar</button>
+  <button mat-raised-button color="warn">Cancelar</button>
+</form>

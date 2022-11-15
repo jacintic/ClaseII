@@ -1,4 +1,7 @@
 <p>book-list works!</p>
+<button mat-raised-button color="primary" routerLink="/books/new">
+  Create <mat-icon>add</mat-icon>
+</button>
 <table mat-table [dataSource]="books" class="mat-elevation-z8">
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Identifier </th>
@@ -29,12 +32,16 @@
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let book" color="primary">
 
-      <button mat-icon-button color="primary" (click)="onDelete(book.id)">
-        Delete <mat-icon>delete_forever</mat-icon>
-      </button>
-      <button mat-icon-button color="primary"  [routerLink]="['/books', book.id, 'detail']">
+      <button mat-raised-button color="primary" [routerLink]="['/books', book.id, 'detail']">
         See <mat-icon>visibility</mat-icon>
       </button>
+      <button mat-raised-button color="accent" routerLink="/books/new">
+        Edit <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-raised-button color="warn" (click)="onDelete(book.id)">
+        Delete <mat-icon>delete_forever</mat-icon>
+      </button>
+
     </td>
   </ng-container>
 

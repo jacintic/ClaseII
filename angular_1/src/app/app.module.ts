@@ -15,14 +15,16 @@ import { MatDividerModule } from '@angular/material/divider';
 // components 
 import { BookListComponent } from './book-list/book-list.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
-import { RouterModule } from '@angular/router'
+import { RouterModule } from '@angular/router';
+import { BookFormComponent } from './book-form/book-form.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
-    BookDetailComponent
+    BookDetailComponent,
+    BookFormComponent
   ],
   imports: [
     BrowserModule,

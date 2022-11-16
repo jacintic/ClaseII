@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { Book } from '../models/book.model';
 import { BookService } from '../services/book.service';
 import { Author } from '../models/author.model';
 import { AuthorService } from '../services/author.service';
@@ -18,7 +17,6 @@ export class BookFormComponent implements OnInit {
 
   editForm = this.createFormGroup();
   error: boolean = false;
-  book: Book | undefined;
   authors: Author[] = [];
 
   constructor(

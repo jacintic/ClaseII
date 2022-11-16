@@ -2,7 +2,7 @@
 
 namespace ASPNET2.Repositories
 {
-    internal interface ICategoryRepository
+    public interface ICategoryRepository
     {
 
         // buscar por Id

@@ -3,7 +3,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { BookService } from '../services/book.service';
 import { Author } from '../models/author.model';
 import { AuthorService } from '../services/author.service';
+import { Category } from '../models/category.model';
+import { CategoryService } from '../services/category.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 
@@ -18,10 +21,12 @@ export class BookFormComponent implements OnInit {
   editForm = this.createFormGroup();
   error: boolean = false;
   authors: Author[] = [];
+  categories: Category[] = [];
 
   constructor(
     private bookService: BookService,
     private authorService: AuthorService,
+    private categoryService: CategoryService,
     private router: Router,
     private activatedRoute: ActivatedRoute  ) { }
 
@@ -36,7 +41,8 @@ export class BookFormComponent implements OnInit {
           this.fetchBookWithInc(Number(id)) 
       }
     }),
-    this.fetchAuthors()  
+      this.fetchAuthors()
+      this.fetchCategories()
   }
   createFormGroup() {
     return new FormGroup({
@@ -49,6 +55,7 @@ export class BookFormComponent implements OnInit {
       price: new FormControl(),
       // TODO - asociacion categories
       authorId: new FormControl(),
+      categories: new FormControl(),
     });
   }
 
@@ -56,6 +63,13 @@ export class BookFormComponent implements OnInit {
     this.authorService.findAll().subscribe(
       {
         next: authorsRes => this.authors = authorsRes,
+        error: err => this.showError(err)
+      })
+  }
+  fetchCategories() {
+    this.categoryService.findAll().subscribe(
+      {
+        next: catRes => this.categories = catRes,
         error: err => this.showError(err)
       })
   }
@@ -68,7 +82,8 @@ export class BookFormComponent implements OnInit {
       description: this.editForm.get("description")?.value,
       releaseYear: this.editForm.get("releaseYear")?.value,
       price: this.editForm.get("price")?.value,
-      authorId: this.editForm.get("authorId")?.value
+      authorId: this.editForm.get("authorId")?.value,
+      categories: this.editForm.get("categories")?.value,
     } as any
     console.log(book)
     let id = this.editForm.get("id")?.value
@@ -112,6 +127,7 @@ export class BookFormComponent implements OnInit {
           isbn: bookFromBackend.isbn,
           releaseYear: bookFromBackend.releaseYear,
           authorId: bookFromBackend.authorId,
+          categories: bookFromBackend.categories,
         } as any)
       },
       error: err => console.log(err)

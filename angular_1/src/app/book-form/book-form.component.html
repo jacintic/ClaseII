@@ -44,6 +44,15 @@
     </mat-select>
   </mat-form-field>
 
+  <mat-form-field appearance="fill">
+    <mat-label>Categorias</mat-label>
+    <mat-select multiple>
+      <!--[formControl]="categories"-->
+      <mat-option *ngFor="let category of categories" [value]="category">{{category.name}}, minimum age: {{category.minAge}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
   <button mat-raised-button color="primary" type="submit">Guardar</button>
   <button mat-raised-button color="warn" routerLink="/books">Cancelar</button>
 </form>

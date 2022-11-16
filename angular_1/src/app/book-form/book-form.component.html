@@ -6,13 +6,18 @@
 <form class="example-form" [formGroup]="editForm" (ngSubmit)="save()">
 
   <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>ID</mat-label>
+    <input matInput placeholder="3" type="number" formControlName="id">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>ISBN</mat-label>
     <input matInput placeholder="4g56h4" formControlName="isbn" value="{{book?.title}}">
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Titulo</mat-label>
-    <input matInput placeholder="Don Quijote" formControlName="title"  value="{{book?.title}}">
+    <input matInput placeholder="Don Quijote" formControlName="title" value="{{book?.title}}">
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">

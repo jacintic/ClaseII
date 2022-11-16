@@ -27,25 +27,24 @@ export class BookFormComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe({
       next: pmap => {
         let id = pmap.get("id");
+        // if the id is set
+          // fetch the book with this id
         if (id) 
           this.fetchBookWithInc(Number(id)) 
       }
     })
-    // 1. if there is ID, fetch from backend (book/id)
-      // 1. load book in form
-
-    // 2. no ID? do nothing
   }
 
   createFormGroup() {
     return new FormGroup({
 
-      //id: new FormControl(),
+      id: new FormControl({ value: null, disabled: true }),
       isbn: new FormControl(),
       title: new FormControl(),
       description: new FormControl(),
       releaseYear: new FormControl(),
       price: new FormControl(),
+      // TODO - asociaciones author y categories
 
     });
   }
@@ -80,7 +79,17 @@ export class BookFormComponent implements OnInit {
   // llama al backend con esa id
   private fetchBookWithInc(id: string | number | null) {
     this.bookService.findByIdWithInclude(Number(id)).subscribe({
-      next: bookFromBackend => this.book = bookFromBackend,
+      /*next: bookFromBackend => this.editForm.reset(bookFromBackend),*///this.book = bookFromBackend,
+      next: bookFromBackend => {
+        this.editForm.reset({
+          id: { value: bookFromBackend.id, disabled: true },
+          title: bookFromBackend.title,
+          price: bookFromBackend.price,
+          description: bookFromBackend.description,
+          isbn: bookFromBackend.isbn,
+          releaseYear: bookFromBackend.releaseYear ,
+        } as any)
+      },
       error: err => console.log(err)
     }
     );

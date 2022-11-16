@@ -57,15 +57,26 @@ export class BookFormComponent implements OnInit {
       description: this.editForm.get("description")?.value,
       releaseYear: this.editForm.get("releaseYear")?.value,
       price: this.editForm.get("price")?.value
-    } as Book
+    } as any
     console.log(book)
+    let id = this.editForm.get("id")?.value
     // save to DB
-    this.bookService.create(book).subscribe(
-      {
-        next: response => this.navigateToList(),
-        error: err => this.showError(err)
-      }
-    );
+    if (id) {
+      book.id = id
+      this.bookService.update(book).subscribe(
+        {
+          next: response => this.navigateToList(),
+          error: err => this.showError(err)
+        }
+      );
+    } else {
+      this.bookService.create(book).subscribe(
+        {
+          next: response => this.navigateToList(),
+          error: err => this.showError(err)
+        }
+      );
+    }
   }
 
   private navigateToList() {

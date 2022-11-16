@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Book } from '../models/book.model';
 import { BookService } from '../services/book.service';
+import { Author } from '../models/author.model';
+import { AuthorService } from '../services/author.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 
 
@@ -16,9 +19,11 @@ export class BookFormComponent implements OnInit {
   editForm = this.createFormGroup();
   error: boolean = false;
   book: Book | undefined;
+  authors: Author[] = [];
 
   constructor(
     private bookService: BookService,
+    private authorService: AuthorService,
     private router: Router,
     private activatedRoute: ActivatedRoute  ) { }
 
@@ -32,9 +37,9 @@ export class BookFormComponent implements OnInit {
         if (id) 
           this.fetchBookWithInc(Number(id)) 
       }
-    })
+    }),
+    this.fetchAuthors()  
   }
-
   createFormGroup() {
     return new FormGroup({
 
@@ -44,9 +49,17 @@ export class BookFormComponent implements OnInit {
       description: new FormControl(),
       releaseYear: new FormControl(),
       price: new FormControl(),
-      // TODO - asociaciones author y categories
-
+      // TODO - asociacion categories
+      authorId: new FormControl(),
     });
+  }
+
+  fetchAuthors() {
+    this.authorService.findAll().subscribe(
+      {
+        next: authorsRes => this.authors = authorsRes,
+        error: err => this.showError(err)
+      })
   }
 
   save() {
@@ -56,7 +69,8 @@ export class BookFormComponent implements OnInit {
       title: this.editForm.get("title")?.value,
       description: this.editForm.get("description")?.value,
       releaseYear: this.editForm.get("releaseYear")?.value,
-      price: this.editForm.get("price")?.value
+      price: this.editForm.get("price")?.value,
+      authorId: this.editForm.get("authorId")?.value
     } as any
     console.log(book)
     let id = this.editForm.get("id")?.value
@@ -98,7 +112,8 @@ export class BookFormComponent implements OnInit {
           price: bookFromBackend.price,
           description: bookFromBackend.description,
           isbn: bookFromBackend.isbn,
-          releaseYear: bookFromBackend.releaseYear ,
+          releaseYear: bookFromBackend.releaseYear,
+          authorId: bookFromBackend.authorId,
         } as any)
       },
       error: err => console.log(err)

@@ -35,6 +35,15 @@
     <input matInput placeholder="9.99" type="number" formControlName="price">
   </mat-form-field>
 
+  <mat-form-field appearance="fill">
+    <mat-label>Autor</mat-label>
+    <mat-select formControlName="authorId">
+      <mat-option *ngFor="let author of authors" [value]="author.id">
+        {{author.fullName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <button mat-raised-button color="primary" type="submit">Guardar</button>
   <button mat-raised-button color="warn" routerLink="/books">Cancelar</button>
 </form>

@@ -19,7 +19,7 @@ public class Address
 
 
     // associations
-    public Author Author { get; set; }
+    public Author? Author { get; set; }
 
     // constructor
 

@@ -26,7 +26,7 @@ public class Category
 
     [JsonIgnore]
     // association Many To Many with Book
-    public IList<Book> Books { get; set; }
+    public IList<Book>? Books { get; set; }
 
     
 }

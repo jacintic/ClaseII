@@ -1,0 +1,12 @@
+/* table */
+table {
+  width: 100%;
+}
+
+th, td {
+  padding-right: 1rem !important;
+}
+
+button {
+    margin-right: 1rem !important;
+}

@@ -8,15 +8,11 @@ public class Book
     public int Id { get; set; }
 
     [Required(ErrorMessage = "Title required"),
-    Column("title"),
-    MinLength(3), 
-    MaxLength(50, ErrorMessage ="Title too long (50-)")]
+    Column("title")]
     public string Title { get; set; }
 
     [Required,
-    Column("isbn"),
-    MinLength(5),
-    MaxLength(7, ErrorMessage = "Title too long (50-)")]
+    Column("isbn")]
     public string Isbn { get; set; }
 
     [Column("price")]

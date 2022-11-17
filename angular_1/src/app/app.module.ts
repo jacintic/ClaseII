@@ -14,6 +14,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
+import { MatButtonToggleModule } from '@angular/material/button-toggle'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -22,14 +23,15 @@ import { BookListComponent } from './book-list/book-list.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { RouterModule } from '@angular/router';
 import { BookFormComponent } from './book-form/book-form.component'
-
+import { AuthorListComponent } from './author-list/author-list.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     BookListComponent,
     BookDetailComponent,
-    BookFormComponent
+    BookFormComponent,
+    AuthorListComponent
   ],
   imports: [
     // material design
@@ -41,6 +43,7 @@ import { BookFormComponent } from './book-form/book-form.component'
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonToggleModule,
     // angular
     BrowserModule,
     BrowserAnimationsModule,
@@ -51,7 +54,8 @@ import { BookFormComponent } from './book-form/book-form.component'
       { path: 'books', component: BookListComponent },
       { path: 'books/:id/detail', component: BookDetailComponent },
       { path: 'books/new', component: BookFormComponent },
-      { path: 'books/:id/edit', component: BookFormComponent }
+      { path: 'books/:id/edit', component: BookFormComponent },
+      { path: 'authors', component: AuthorListComponent }
     ])
   ],
   providers: [],

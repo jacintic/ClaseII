@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNET2.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221114082819_BookPrice")]
-    partial class BookPrice
+    [Migration("20221116135251_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnName("id")
                         .HasColumnOrder(0);
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -98,11 +98,10 @@ namespace ASPNET2.Db.Migrations
 
                     b.Property<string>("Isbn")
                         .IsRequired()
-                        .HasMaxLength(7)
-                        .HasColumnType("varchar(7)")
+                        .HasColumnType("longtext")
                         .HasColumnName("isbn");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("price");
 
@@ -112,8 +111,7 @@ namespace ASPNET2.Db.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)")
+                        .HasColumnType("longtext")
                         .HasColumnName("title");
 
                     b.HasKey("Id");
@@ -166,9 +164,7 @@ namespace ASPNET2.Db.Migrations
                 {
                     b.HasOne("ASPNET2.Models.Author", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("Author");
                 });

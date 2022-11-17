@@ -1,3 +1,7 @@
-<a routerLink="/books">Listado de libros</a>
-<a routerLink="/books/1/detail">Detalle de un libro</a>
+<img src="../assets/img/logo.png" class="logo"/>
+<mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+  <mat-button-toggle value="bold" routerLink="/books">Libros</mat-button-toggle>
+  <mat-button-toggle value="italic" routerLink="/books/1/detail">Libro 1</mat-button-toggle>
+  <mat-button-toggle value="underline" routerLink="/authors">Autores</mat-button-toggle>
+</mat-button-toggle-group>
 <router-outlet></router-outlet>

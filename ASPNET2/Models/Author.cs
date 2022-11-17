@@ -30,7 +30,7 @@ public class Author
 
     // associations
     [JsonIgnore]
-    public ICollection<Book> Books;
+    public ICollection<Book>? Books;
 
     //[JsonIgnore]
     public Address? Address;

@@ -21,6 +21,7 @@ public class Address
     // associations
 
     [JsonIgnore]
+    [InverseProperty("Address")]
     public Author? Author { get; set; }
 
     // FK

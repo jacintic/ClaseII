@@ -19,8 +19,11 @@ public class Address
 
 
     // associations
+
+    [JsonIgnore]
     public Author? Author { get; set; }
 
+    // FK
     // constructor
 
     // ToString

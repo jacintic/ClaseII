@@ -4,4 +4,5 @@ export interface Author {
   email: string;
   salary: number;
   birthDate?: any;
+  address?: any;
 }

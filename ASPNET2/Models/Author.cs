@@ -30,11 +30,9 @@ public class Author
 
     // associations
     [JsonIgnore]
-    public ICollection<Book>? Books;
-
-    //[JsonIgnore]
-    public Address? Address;
-    public int? AddressId;
+    public ICollection<Book>? Books { get; set; }
+    public Address? Address { get; set; }
+    public int? AddressId { get; set; }
     // consturctor
     // methods
     // tostring

@@ -10,6 +10,8 @@ public interface IAuthorRepository
 {
     Author FindById(int id);
 
+    Author FindByIdWithInclude(int id);
+
     List<Author> FindAll();
 
     Author FindByEmail(string email);

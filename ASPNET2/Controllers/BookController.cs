@@ -46,6 +46,14 @@ public class BookController
         return BookRepo.FindByIdWithAssociations(id);
     }
 
+    // extra methods
+    // https://localhost:7230/api/books/findall
+    [HttpGet("author/{id}")]
+    public List<Book> FindByAuthor(int id)
+    {
+        return BookRepo.FindByAuthorId(id);
+    }
+
 
     // https://localhost:7230/api/books
     [HttpPost]
@@ -72,4 +80,6 @@ public class BookController
         BookRepo.Delete(id);
 
     }
+
+
 }

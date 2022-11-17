@@ -31,6 +31,15 @@ public class AuthorDbRepository : IAuthorRepository
         return Context.Authors.Find(id);
     }
 
+    public Author FindByIdWithInclude(int id)
+    {
+        return
+            Context.Authors
+            .Include(author => author.Address)
+            .Where(author => author.Id == id)
+            .FirstOrDefault();
+    }
+
     public List<Author> FindAll()
     {
         return Context.Authors.ToList();
@@ -140,4 +149,6 @@ public class AuthorDbRepository : IAuthorRepository
         Context.SaveChanges();
         return true;
     }
+
+    
 }

@@ -27,9 +27,6 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnName("id")
                         .HasColumnOrder(0);
 
-                    b.Property<int?>("AuthorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -39,8 +36,6 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AuthorId");
 
                     b.ToTable("address");
                 });
@@ -52,6 +47,9 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("int")
                         .HasColumnName("id")
                         .HasColumnOrder(0);
+
+                    b.Property<int?>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime(6)")
@@ -75,6 +73,9 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnName("salary");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.ToTable("author");
                 });
@@ -158,19 +159,19 @@ namespace ASPNET2.Db.Migrations
                     b.ToTable("BookCategory");
                 });
 
-            modelBuilder.Entity("ASPNET2.Models.Address", b =>
+            modelBuilder.Entity("ASPNET2.Models.Author", b =>
                 {
-                    b.HasOne("ASPNET2.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId");
+                    b.HasOne("ASPNET2.Models.Address", "Address")
+                        .WithOne("Author")
+                        .HasForeignKey("ASPNET2.Models.Author", "AddressId");
 
-                    b.Navigation("Author");
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("ASPNET2.Models.Book", b =>
                 {
                     b.HasOne("ASPNET2.Models.Author", "Author")
-                        .WithMany()
+                        .WithMany("Books")
                         .HasForeignKey("AuthorId");
 
                     b.Navigation("Author");
@@ -189,6 +190,16 @@ namespace ASPNET2.Db.Migrations
                         .HasForeignKey("CategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("ASPNET2.Models.Address", b =>
+                {
+                    b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("ASPNET2.Models.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

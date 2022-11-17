@@ -21,6 +21,12 @@ public class AuthorController
         return AuthRepo.FindById(id);
     }
 
+    [HttpGet("include/{id}")]
+    public Author FindByIdWithInclude(int id)
+    {
+        return AuthRepo.FindByIdWithInclude(id);
+    }
+
 
     // https://localhost:7230/api/authros/findall
     [HttpGet]

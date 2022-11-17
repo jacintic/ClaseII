@@ -23,6 +23,9 @@ export class BookService {
   findById(id: number) {//  /api/books/1
     return this.http.get<Book>(`${this.url}/${id}`)
   }
+  findByAuthorId(id: number) {//  /api/books/1
+    return this.http.get<Book[]>(`${this.url}/author/${id}`)
+  }
 
   deleteById(id: number) {//  /api/books/1
     return this.http.delete(`${this.url}/${id}`)

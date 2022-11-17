@@ -1,0 +1,47 @@
+<mat-card class="example-card" *ngIf="author">
+  <div class="custom-margin">
+    <mat-card-title>Detalle de autor</mat-card-title>
+    <mat-card-subtitle>{{author.fullName}}</mat-card-subtitle>
+
+    <mat-card-content>
+      <p><strong>Salario: </strong> {{author.salary}}</p>
+    </mat-card-content>
+
+
+    <mat-divider inset></mat-divider>
+    <mat-card-content>
+      <p><strong>Email: </strong> {{author.email}}</p>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="author.address">
+      <mat-card-subtitle>Direción:</mat-card-subtitle>
+      <p><strong>Ciudad: </strong> {{author.address.city}}</p>
+      <p><strong>Calle: </strong> {{author.address.street}}</p>
+    </mat-card-content>
+  </div>
+
+  <div class="custom-margin" *ngIf="books">
+    <mat-list>
+      <div mat-subheader>Libros</div>
+      <mat-list-item *ngFor="let book of books">
+        <mat-icon matListItemIcon>book</mat-icon>
+        <div matListItemTitle>{{book.title}}</div>
+        <div matListItemLine>{{book.releaseYear}}</div>
+      </mat-list-item>
+    </mat-list>
+  </div>
+
+    <mat-divider inset></mat-divider>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [routerLink]="['/authors', author.id, 'edit']">Editar</button>
+      <button mat-raised-button color="warn" (click)="onDelete(author.id)">Borrar</button>
+      <button mat-raised-button routerLink="/authors">Volver</button>
+    </mat-card-actions>
+
+
+</mat-card>
+<mat-card class="example-card" *ngIf="!author">
+  <mat-card-content>
+    <p>Cargando autor...</p>
+  </mat-card-content>
+</mat-card>

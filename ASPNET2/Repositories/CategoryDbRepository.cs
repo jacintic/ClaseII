@@ -33,5 +33,19 @@ namespace ASPNET2.Repositories
             return category;
         }
 
+        public Category Update(Category category)
+        {
+            if (category.Id == 0)
+                return Create(category);
+
+            // guardar solo attributes que interesen
+            Context.Categories.Attach(category);
+            Context.Entry(category).Property(b => b.Name).IsModified = true;
+            Context.Entry(category).Property(b => b.MinAge).IsModified = true;
+            Context.SaveChanges();
+
+            return FindById(category.Id);
+        }
+
     }
 }

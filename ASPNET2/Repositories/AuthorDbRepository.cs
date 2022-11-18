@@ -118,13 +118,7 @@ public class AuthorDbRepository : IAuthorRepository
         Context.Addresses.Update(author.Address);
         Context.SaveChanges();
 
-
         return author;
-
-
-
-
-
     }
 
     public bool Remove(int id)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ASPNET2.Models;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace ASPNET2.Controllers;
@@ -30,5 +31,19 @@ public class CategoryController
     public List<Category> FindAll()
     {
         return CatRepo.FindAll();
+    }
+
+    // https://localhost:7230/api/books/findall
+    [HttpPost]
+    public Category Create(Category category)
+    {
+        return CatRepo.Create(category);
+    }
+
+    // https://localhost:7230/api/books/findall
+    [HttpPut]
+    public Category Update(Category category)
+    {
+        return CatRepo.Update(category);
     }
 }

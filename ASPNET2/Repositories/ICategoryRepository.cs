@@ -14,5 +14,7 @@ namespace ASPNET2.Repositories
 
         // guardar
         Category Create(Category category);
+
+        Category Update(Category category);
     }
 }

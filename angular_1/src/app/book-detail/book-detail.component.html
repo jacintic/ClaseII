@@ -17,7 +17,11 @@
   </mat-card-content>
 
   <mat-card-content *ngIf="book.author">
-    <p><strong>Autor: </strong> {{book.author.fullName}}</p>
+    <p><strong>Autor: </strong>
+       <button mat-button color="accent" [routerLink]="['/authors', book.author.id, 'detail']">
+      {{book.author.fullName}}
+       </button>
+    </p>
   </mat-card-content>
 
   <mat-card-content *ngIf="book.categories">

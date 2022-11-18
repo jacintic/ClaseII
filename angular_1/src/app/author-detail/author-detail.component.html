@@ -25,7 +25,9 @@
       <div mat-subheader>Libros</div>
       <mat-list-item *ngFor="let book of books">
         <mat-icon matListItemIcon>book</mat-icon>
-        <div matListItemTitle>{{book.title}}</div>
+        <div matListItemTitle >
+          <button mat-raised-button [routerLink]="['/books', book.id, 'detail']">{{book.title}}</button>
+        </div>
         <div matListItemLine>{{book.releaseYear}}</div>
       </mat-list-item>
     </mat-list>

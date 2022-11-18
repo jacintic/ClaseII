@@ -20,8 +20,7 @@ export class BookFormComponent implements OnInit {
 
   editForm = this.createFormGroup();
   error: boolean = false;
-  authors: Author[] = [];
-  categories: Category[] = [];
+  authors: Author | undefined;
 
   constructor(
     private bookService: BookService,

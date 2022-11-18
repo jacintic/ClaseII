@@ -95,6 +95,10 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("description");
 
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("longtext")
+                        .HasColumnName("img");
+
                     b.Property<string>("Isbn")
                         .IsRequired()
                         .HasColumnType("longtext")

@@ -101,26 +101,22 @@ public class AuthorDbRepository : IAuthorRepository
     {
         if (author.Id == 0)
             return Create(author);
-        /*Author authorEntity = FindById(author.Id);
-        if (authorEntity == null)
-            return null;
-        authorEntity.Email = author.Email;
-        authorEntity.FullName = author.FullName;
-        authorEntity.Salary = author.Salary;
 
-        Context.Authors.Update(authorEntity);
-
-        Context.SaveChanges();*/
 
         Context.Authors.Attach(author);
         Context.Entry(author).Property(a => a.Email).IsModified = true;
         Context.Entry(author).Property(a => a.FullName).IsModified = true;
+        Context.Entry(author).Reference(a => a.Address).IsModified = true;
+
         //Context.Entry(book).Property(b => b.Categories).IsModified = true;
         //Context.Entry(author).Property(a => a.Address).IsModified = true; // revisar
 
         Context.SaveChanges();
 
-
+        // refactor update so it updates author's addresses
+        Context.Authors.Update(author);
+        Context.Addresses.Update(author.Address);
+        Context.SaveChanges();
 
 
         return author;

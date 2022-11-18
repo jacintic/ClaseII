@@ -4,6 +4,7 @@ export interface Book {
   id: number;
   title: string;
   isbn?: string;
+  imgUrl?: string;
   releaseYear?: number;
   description?: string;
   price?: number;

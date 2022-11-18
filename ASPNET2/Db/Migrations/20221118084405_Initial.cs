@@ -81,6 +81,8 @@ namespace ASPNET2.Db.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     isbn = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    img = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     release_year = table.Column<int>(type: "int", nullable: false),
                     description = table.Column<string>(type: "longtext", nullable: false)

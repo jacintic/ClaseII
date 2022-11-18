@@ -10,6 +10,9 @@
     <p><strong>Año de publicación: </strong> {{book.releaseYear}}</p>
   </mat-card-content>
 
+  <mat-card-content *ngIf="book.imgUrl">
+    <a href="{{book.imgUrl}}" target="_blank"><img src="{{book.imgUrl}}" /></a>
+  </mat-card-content>
 
   <mat-divider inset></mat-divider>
   <mat-card-content>
@@ -17,10 +20,11 @@
   </mat-card-content>
 
   <mat-card-content *ngIf="book.author">
-    <p><strong>Autor: </strong>
-       <button mat-button color="accent" [routerLink]="['/authors', book.author.id, 'detail']">
-      {{book.author.fullName}}
-       </button>
+    <p>
+      <strong>Autor: </strong>
+      <button mat-button color="accent" [routerLink]="['/authors', book.author.id, 'detail']">
+        {{book.author.fullName}}
+      </button>
     </p>
   </mat-card-content>
 

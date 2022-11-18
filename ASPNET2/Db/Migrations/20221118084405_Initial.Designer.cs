@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPNET2.Db.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221117124405_Initial")]
+    [Migration("20221118084405_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,6 +96,10 @@ namespace ASPNET2.Db.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("description");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("longtext")
+                        .HasColumnName("img");
 
                     b.Property<string>("Isbn")
                         .IsRequired()

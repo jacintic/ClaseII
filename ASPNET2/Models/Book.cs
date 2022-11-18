@@ -15,6 +15,9 @@ public class Book
     Column("isbn")]
     public string Isbn { get; set; }
 
+    [Column("img")]
+    public string? ImgUrl { get; set; }
+
     [Column("price")]
     public decimal? Price { get; set; }
     

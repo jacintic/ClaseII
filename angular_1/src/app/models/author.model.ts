@@ -5,4 +5,5 @@ export interface Author {
   salary: number;
   birthDate?: any;
   address?: any;
+  addressId?: number;
 }

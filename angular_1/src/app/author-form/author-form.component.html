@@ -1,4 +1,5 @@
-<h2>Crear nuevo libro</h2>
+<h2 *ngIf="isEdit">Actualizar nuevo libro</h2>
+<h2 *ngIf="!isEdit">Crear nuevo libro</h2>
 <mat-card *ngIf="error">
   ERROR: Se ha productido un error, intentalo de nuevo mas tarde.
 </mat-card>
@@ -20,8 +21,43 @@
     <input matInput placeholder="dave@mail.co" formControlName="email">
   </mat-form-field>
 
-  <!-- Address -->
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Salario</mat-label>
+    <input matInput placeholder="1500 €" type="number" formControlName="salary">
+  </mat-form-field>
 
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Fecha nacimiento</mat-label>
+    <input matInput placeholder="2000-10-10" formControlName="birthDate">
+  </mat-form-field>
+
+
+ <!-- <mat-form-field appearance="fill">
+    <mat-label>Fecha nacimiento</mat-label>
+    <input matInput [matDatepicker]="picker" formControlName="birthDate">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>-->
+
+
+
+  <!-- Address -->
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Id dirección</mat-label>
+    <input matInput placeholder="2000/10/10" formControlName="idAddress">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Ciudad</mat-label>
+    <input matInput placeholder="Madrid" formControlName="city">
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Calle</mat-label>
+    <input matInput placeholder="C/ del Sol 19 1º" formControlName="street">
+  </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit">Guardar</button>
   <button mat-raised-button color="warn" routerLink="/books">Cancelar</button>

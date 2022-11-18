@@ -1,0 +1,18 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+button {
+  margin-right: 1rem !important;
+}
+mat-card {
+  border: solid 2px red;
+  color:red;
+  background: rgba(255,0,0,0.1)
+}

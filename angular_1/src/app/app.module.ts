@@ -29,6 +29,7 @@ import { BookFormComponent } from './book-form/book-form.component'
 import { AuthorListComponent } from './author-list/author-list.component'
 import { AuthorDetailComponent } from './author-detail/author-detail.component';
 import { AuthorFormComponent } from './author-form/author-form.component';
+import { CategoryFormComponent } from './category-form/category-form.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { AuthorFormComponent } from './author-form/author-form.component';
     AuthorListComponent,
     AuthorDetailComponent,
     AuthorFormComponent,
+    CategoryFormComponent,
   ],
   imports: [
     // material design
@@ -61,15 +63,20 @@ import { AuthorFormComponent } from './author-form/author-form.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'books', pathMatch: 'full'},
+      { path: '', redirectTo: 'books', pathMatch: 'full' },
+
       { path: 'books', component: BookListComponent },
       { path: 'books/:id/detail', component: BookDetailComponent },
       { path: 'books/new', component: BookFormComponent },
       { path: 'books/:id/edit', component: BookFormComponent },
+
       { path: 'authors', component: AuthorListComponent },
       { path: 'authors/:id/detail', component: AuthorDetailComponent },
       { path: 'authors/new', component: AuthorFormComponent },
       { path: 'authors/:id/edit', component: AuthorFormComponent },
+
+      { path: 'categories/new', component: CategoryFormComponent },
+      { path: 'categories/:id/edit', component: CategoryFormComponent },
     ])
   ],
   providers: [],

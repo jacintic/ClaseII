@@ -113,6 +113,7 @@ export class AuthorFormComponent implements OnInit {
         this.editForm.reset({
           id: { value: authorFromBackend.id, disabled: true },
           fullName: authorFromBackend.fullName,
+          email: authorFromBackend.email,
           salary: authorFromBackend.salary,
           price: authorFromBackend.email,
           birthDate: authorFromBackend.birthDate,

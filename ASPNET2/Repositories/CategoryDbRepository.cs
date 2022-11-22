@@ -26,6 +26,14 @@ namespace ASPNET2.Repositories
             return Context.Categories.ToList();
         }
 
+        public List<Category> FindAllByIdIn(List<int> ids)
+        {
+            List<Category> result = new List<Category>();   
+            foreach(int id in ids)
+                result.Add(Context.Categories.Find(id));
+            return result;
+        }
+
         public Category Create(Category category)
         {
             Context.Categories.Add(category);

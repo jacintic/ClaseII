@@ -11,6 +11,7 @@ namespace ASPNET2.Repositories
 
         // obtener todos
         List<Category> FindAll();
+        List<Category> FindAllByIdIn(List<int> ids);
 
         // guardar
         Category Create(Category category);

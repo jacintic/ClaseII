@@ -33,6 +33,13 @@ public class BookController
         return BookRepo.FindAll();
     }
 
+    // https://localhost:7230/api/books/findall
+    [HttpGet("postmanupdate")]
+    public List<Book> FindAllII()
+    {
+        return BookRepo.FindAll();
+    }
+
     // https://localhost:7230/api/books/title
     [HttpGet("title/{title}")]
     public List<Book> FindByTitleContains(string title)

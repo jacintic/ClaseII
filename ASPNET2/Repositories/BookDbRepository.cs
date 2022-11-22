@@ -29,7 +29,7 @@ public class BookDbRepository : IBookRepository
             .Include(b => b.Categories)
             .Include(b => b.Author)
             .Where(b => b.Id == id)
-            .FirstOrDefault();
+            .First();
     }
 
     public List<Book> FindByAuthorId(int id)
@@ -66,6 +66,8 @@ public class BookDbRepository : IBookRepository
     {
         if (book.Id > 0)
             return Update(book);
+        if (book.Categories != null && book.Categories.Count > 0)
+            Context.Categories.AttachRange(book.Categories);
         Context.Books.Add(book);
         Context.SaveChanges();
         return book;
@@ -75,21 +77,55 @@ public class BookDbRepository : IBookRepository
     {
         if (book.Id == 0)
             return Create(book);
+        var bookDb = FindByIdWithAssociations(book.Id);
+        if (bookDb is null)
+            throw new Exception("Book not found");
+        // if author id
+        if (book.AuthorId == 0)
+            throw new Exception("Author Id can't be 0");
+        // if category id
+        //foreach (Category category in book.Categories)
+        //    if (category.Id == 0)
+        //        throw new Exception("Category  Idcan't be 0");
+        // update categories as well
+        //if (book.Categories != null && book.Categories.Count > 0)
+        //    Context.Categories.AttachRange(book.Categories);
+        
+        //Context.Books.Attach(book);
+        //// guardar solo attributes que interesen
+        //Context.Entry(book).Property(b => b.Title).IsModified = true;
+        //Context.Entry(book).Property(b => b.Description).IsModified = true;
+        //Context.Entry(book).Property(b => b.AuthorId).IsModified = true;
+        //Context.Entry(book).Property(b => b.Isbn).IsModified = true;
+        //Context.Entry(book).Property(b => b.ImgUrl).IsModified = true;
+        //Context.Entry(book).Property(b => b.Price).IsModified = true;
+        //Context.Entry(book).Property(b => b.ReleaseYear).IsModified = true;
+        //Context.Entry(book).Collection(b => b.Categories).IsModified = true;
+        
+        bookDb.Title = book.Title;
+        bookDb.Isbn = book.Isbn;
+        bookDb.Price = book.Price;
+        bookDb.ReleaseYear = book.ReleaseYear;
+        bookDb.Description = book.Description;
+        bookDb.AuthorId = book.AuthorId;
+        // deal with category
+        bookDb.Categories.Clear();
+        bookDb.Categories = book.Categories;
+        // TODO solve updating same categories twice problem
+        //  //ans
+        foreach (Category category in book.Categories)
+            bookDb.Categories.Add(Context.Categories.Find(category.Id));
+        //Context.Entry(bookDb).State = EntityState.Modified;
 
-        // guardar solo attributes que interesen
-        Context.Books.Attach(book);
-        Context.Entry(book).Property(b => b.Title).IsModified = true;
-        Context.Entry(book).Property(b => b.Description).IsModified = true;
-        Context.Entry(book).Property(b => b.AuthorId).IsModified = true;
-        Context.Entry(book).Property(b => b.Isbn).IsModified = true;
-        Context.Entry(book).Property(b => b.ImgUrl).IsModified = true;
-        Context.Entry(book).Property(b => b.Price).IsModified = true;
-        Context.Entry(book).Property(b => b.ReleaseYear).IsModified = true;
-        Context.Entry(book).Collection(b => b.Categories).IsModified = true;
 
+        // update
+        // update categories
+        //Context.Books.Update(book);
+        //if (book.Categories != null && book.Categories.Count > 0)
+        //    Context.Categories.UpdateRange(book.Categories);
         Context.SaveChanges();
 
-        return FindById(book.Id);
+        return FindById(bookDb.Id);
     }
 
     public bool Delete(int id)

@@ -32,6 +32,12 @@ public class CategoryController
     {
         return CatRepo.FindAll();
     }
+    // https://localhost:7230/api/books/findall
+    [HttpPost("id_range")]
+    public List<Category> FindByIdRange(List<int> ids)
+    {
+        return CatRepo.FindAllByIdIn(ids);
+    }
 
     // https://localhost:7230/api/books/findall
     [HttpPost]

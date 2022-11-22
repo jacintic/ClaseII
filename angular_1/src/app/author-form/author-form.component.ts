@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { BookService } from '../services/book.service';
 import { Author } from '../models/author.model';
 import { AuthorService } from '../services/author.service';
@@ -49,14 +49,44 @@ export class AuthorFormComponent implements OnInit {
     return new FormGroup({
 
       id: new FormControl({ value: null, disabled: true }),
-      fullName: new FormControl(),
-      email: new FormControl(),
-      salary: new FormControl(),
+      fullName: new FormControl('', {
+        nonNullable: true, validators: [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(50),
+        ]
+      }),
+      email: new FormControl('', {
+        nonNullable: true, validators: [
+          Validators.required,
+          Validators.email,
+          Validators.maxLength(50),
+        ]
+      }),
+      salary: new FormControl('', {
+        nonNullable: true, validators: [
+          Validators.min(1000),
+          Validators.max(8000),
+          Validators.pattern("^[0-9]*$")
+        ]
+      }),
       birthDate: new FormControl(),
       // associations
       idAddress: new FormControl({ value: null, disabled: true }),
-      street: new FormControl(),
-      city: new FormControl(),
+      street: new FormControl('', {
+        nonNullable: true, validators: [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(50),
+        ]
+      }),
+      city: new FormControl('', {
+        nonNullable: true, validators: [
+          Validators.required,
+          Validators.minLength(5),
+          Validators.maxLength(50),
+        ]
+      }),
       
     });
   }

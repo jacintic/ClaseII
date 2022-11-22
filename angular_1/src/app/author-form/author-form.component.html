@@ -11,20 +11,44 @@
     <input matInput placeholder="3" type="number" formControlName="id">
   </mat-form-field>
 
+
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Nombre completo</mat-label>
     <input matInput placeholder="Dave Davidson" formControlName="fullName">
+
+    <mat-error *ngIf="editForm.get('fullName')!.invalid && (editForm.get('fullName')!.dirty || (editForm.get('fullName')!.touched))">
+      <span *ngIf="editForm.get('fullName')!.getError('required')">Nombre obligatorio</span>
+      <span *ngIf="editForm.get('fullName')!.getError('minlength') ||editForm.get('fullName')!.getError('maxlength')">Nombre entre 5 y 50 caracteres</span>
+    </mat-error>
+
   </mat-form-field>
+
+
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Email</mat-label>
     <input matInput placeholder="dave@mail.co" formControlName="email">
+
+    <mat-error *ngIf="editForm.get('email')!.invalid && (editForm.get('email')!.dirty || (editForm.get('email')!.touched))">
+      <span *ngIf="editForm.get('email')!.getError('required')">Email obligatorio</span>
+      <span *ngIf="editForm.get('email')!.getError('email')">Email debe tener el formato correcto</span>
+      <span *ngIf="editForm.get('email')!.getError('maxlength')">Email inferior a 50 caracteres</span>
+    </mat-error>
+
   </mat-form-field>
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Salario</mat-label>
     <input matInput placeholder="1500 €" type="number" formControlName="salary">
+
+    <mat-error *ngIf="editForm.get('salary')!.invalid && (editForm.get('salary')!.dirty || (editForm.get('salary')!.touched))">
+      <span *ngIf="editForm.get('salary')!.getError('min') || editForm.get('salary')!.getError('max')">Salario debe estar en rango 1000 - 8000</span>
+      <span *ngIf="editForm.get('salary')!.getError('pattern')">Salario solo puede contener números</span>
+    </mat-error>
+
   </mat-form-field>
+
+
 
   <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Fecha nacimiento</mat-label>

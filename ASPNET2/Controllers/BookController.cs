@@ -9,11 +9,11 @@ namespace ASPNET2.Controllers;
 [Route("api/books")]
 public class BookController
 {
-    private IBookRepository BookRepo;
+    private readonly IBookService BookService;
 
-    public BookController(IBookRepository bookRepository)
+    public BookController(IBookService bookService)
     {
-        BookRepo = bookRepository;
+        BookService = bookService;
     }
 
 
@@ -22,7 +22,7 @@ public class BookController
     [HttpGet("{id}")]
     public Book FindById(int id)
     {
-        return BookRepo.FindById(id);
+        return BookService.FindById(id);
     }
 
 
@@ -30,27 +30,27 @@ public class BookController
     [HttpGet]
     public List<Book> FindAll()
     {
-        return BookRepo.FindAll();
+        return BookService.FindAll();
     }
 
     // https://localhost:7230/api/books/findall
     [HttpGet("postmanupdate")]
     public List<Book> FindAllII()
     {
-        return BookRepo.FindAll();
+        return BookService.FindAll();
     }
 
     // https://localhost:7230/api/books/title
     [HttpGet("title/{title}")]
     public List<Book> FindByTitleContains(string title)
     {
-        return BookRepo.FindByTitleContains(title);
+        return BookService.FindByTitleContains(title);
     }
 
     [HttpGet("include/{id}")]
     public Book FindByIdWithAssociations(int id)
     {
-        return BookRepo.FindByIdWithAssociations(id);
+        return BookService.FindByIdWithAssociations(id);
     }
 
     // extra methods
@@ -58,20 +58,16 @@ public class BookController
     [HttpGet("author/{id}")]
     public List<Book> FindByAuthor(int id)
     {
-        return BookRepo.FindByAuthorId(id);
+        return BookService.FindByAuthorId(id);
     }
 
-    [HttpGet("count")]
-    public BookStats CalculateCount()
-    {
-        return new BookStats { TotalBooks = 20, MaxPrice = 40 };
-    }
+    
 
     // https://localhost:7230/api/books
     [HttpPost]
     public Book Create(Book book)
     {
-        return BookRepo.Create(book);
+        return BookService.Create(book);
     }
 
     // update
@@ -79,7 +75,7 @@ public class BookController
     [HttpPut]
     public Book Update(Book book)
     {
-        return BookRepo.Update(book);
+        return BookService.Update(book);
     }
 
     
@@ -89,8 +85,14 @@ public class BookController
     [HttpDelete("{id}")]
     public void DeleteById(int id)
     {
-        BookRepo.Delete(id);
+        BookService.Delete(id);
 
+    }
+
+    [HttpGet("stats")]
+    public BookStats CalculateStats()
+    {
+        return new BookStats { TotalBooks = 20, MaxPrice = 40 };
     }
 
 

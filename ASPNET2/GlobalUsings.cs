@@ -12,5 +12,6 @@ global using ASPNET2;
 global using ASPNET2.Db;
 global using ASPNET2.Models;
 global using ASPNET2.Repositories;
-global using ASPNET2.Dto;
+global using ASPNET2.Dtos;
+global using ASPNET2.Services;
 

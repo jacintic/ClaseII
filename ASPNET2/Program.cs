@@ -41,6 +41,8 @@ builder.Services.AddScoped<IBookRepository, BookDbRepository>();
 builder.Services.AddScoped<ICategoryRepository, CategoryDbRepository>();
 builder.Services.AddScoped<IAuthorRepository, AuthorDbRepository>();
 
+// Add services
+builder.Services.AddSingleton<IBookService, BookService>();
 
 
 

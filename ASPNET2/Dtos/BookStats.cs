@@ -1,6 +1,6 @@
 ﻿
 
-namespace ASPNET2.Dto;
+namespace ASPNET2.Dtos;
 
 public class BookStats
 {

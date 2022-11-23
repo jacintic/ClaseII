@@ -29,7 +29,6 @@ public interface IBookRepository
     Book Update(Book book);
 
     // borrar
-    bool Delete(int id); 
-
-
+    bool Delete(int id);
+    BookStats CalcStats();
 }

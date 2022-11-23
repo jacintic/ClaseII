@@ -61,6 +61,11 @@ public class BookController
         return BookRepo.FindByAuthorId(id);
     }
 
+    [HttpGet("count")]
+    public BookStats CalculateCount()
+    {
+        return new BookStats { TotalBooks = 20, MaxPrice = 40 };
+    }
 
     // https://localhost:7230/api/books
     [HttpPost]

@@ -29,7 +29,7 @@ public class Book
     public string Description { get; set; }
     // associations
 
-    public IList<Category>? Categories { get; set; }
+    public List<Category>? Categories { get; set; }
 
     public Author? Author { get; set; }
     public int? AuthorId { get; set; }

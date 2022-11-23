@@ -11,9 +11,11 @@ public class BookDbRepository : IBookRepository
     // attrs
     // attr
     private AppDbContext Context;
-    public BookDbRepository(AppDbContext context)
+    private ICategoryRepository CategoryRepo;
+    public BookDbRepository(AppDbContext context, ICategoryRepository categoryRepository)
     {
         Context = context;
+        this.CategoryRepo = categoryRepository;
     }
 
     // methods
@@ -83,24 +85,6 @@ public class BookDbRepository : IBookRepository
         // if author id
         if (book.AuthorId == 0)
             throw new Exception("Author Id can't be 0");
-        // if category id
-        //foreach (Category category in book.Categories)
-        //    if (category.Id == 0)
-        //        throw new Exception("Category  Idcan't be 0");
-        // update categories as well
-        //if (book.Categories != null && book.Categories.Count > 0)
-        //    Context.Categories.AttachRange(book.Categories);
-        
-        //Context.Books.Attach(book);
-        //// guardar solo attributes que interesen
-        //Context.Entry(book).Property(b => b.Title).IsModified = true;
-        //Context.Entry(book).Property(b => b.Description).IsModified = true;
-        //Context.Entry(book).Property(b => b.AuthorId).IsModified = true;
-        //Context.Entry(book).Property(b => b.Isbn).IsModified = true;
-        //Context.Entry(book).Property(b => b.ImgUrl).IsModified = true;
-        //Context.Entry(book).Property(b => b.Price).IsModified = true;
-        //Context.Entry(book).Property(b => b.ReleaseYear).IsModified = true;
-        //Context.Entry(book).Collection(b => b.Categories).IsModified = true;
         
         bookDb.Title = book.Title;
         bookDb.Isbn = book.Isbn;
@@ -110,12 +94,21 @@ public class BookDbRepository : IBookRepository
         bookDb.AuthorId = book.AuthorId;
         // deal with category
         bookDb.Categories.Clear();
-        bookDb.Categories = book.Categories;
         // TODO solve updating same categories twice problem
         //  //ans
-        foreach (Category category in book.Categories)
-            bookDb.Categories.Add(Context.Categories.Find(category.Id));
+        
         //Context.Entry(bookDb).State = EntityState.Modified;
+
+        // get category ids linked to this book
+        //List<int> ids = new List<int>();
+        //foreach (Category cat in book.Categories)
+        //    ids.Add(cat.Id);
+
+        // same as above but with LinQ
+        List<int> ids = (from Category cat in book.Categories
+                         select cat.Id).ToList();
+        var categories = CategoryRepo.FindAllByIdIn(ids);
+        bookDb.Categories.AddRange(categories);
 
 
         // update
@@ -125,7 +118,7 @@ public class BookDbRepository : IBookRepository
         //    Context.Categories.UpdateRange(book.Categories);
         Context.SaveChanges();
 
-        return FindById(bookDb.Id);
+        return bookDb;
     }
 
     public bool Delete(int id)
@@ -136,5 +129,11 @@ public class BookDbRepository : IBookRepository
         Context.Books.Remove(bookToDelete); // un libro puede tener: author y categories
         Context.SaveChanges();
         return true;
+    }
+
+    public BookStats CalcStats()
+    {
+        new BookStats { };
+        throw new NotImplementedException();
     }
 }

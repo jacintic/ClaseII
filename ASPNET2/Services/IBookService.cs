@@ -24,4 +24,8 @@ public interface IBookService
     // CALC
     BookStats CalcStats();
     Book Publish(int id);
+    void  PublishAllByAuthorId(int id);
+    List<Book> FetchFromFakeApi();
+
+    IDictionary<string, List<Book>> GroupByCategory();
 }

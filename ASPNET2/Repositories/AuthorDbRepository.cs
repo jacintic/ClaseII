@@ -140,5 +140,8 @@ public class AuthorDbRepository : IAuthorRepository
         return true;
     }
 
-    
+    public bool ExistsById(int id)
+    {
+        return Context.Authors.Where(b => b.Id == id).Any();
+    }
 }

@@ -57,6 +57,7 @@ namespace ASPNET2.Db.Migrations
                     full_name = table.Column<string>(type: "varchar(100)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     salary = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: false),
+                    bonus = table.Column<decimal>(type: "decimal(14,2)", precision: 14, scale: 2, nullable: true),
                     birth_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     AddressId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -85,8 +86,9 @@ namespace ASPNET2.Db.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     release_year = table.Column<int>(type: "int", nullable: false),
-                    description = table.Column<string>(type: "longtext", nullable: false)
+                    description = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<int>(type: "int", nullable: true),
                     AuthorId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -129,6 +131,12 @@ namespace ASPNET2.Db.Migrations
                 name: "IX_author_AddressId",
                 table: "author",
                 column: "AddressId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_author_email",
+                table: "author",
+                column: "email",
                 unique: true);
 
             migrationBuilder.CreateIndex(

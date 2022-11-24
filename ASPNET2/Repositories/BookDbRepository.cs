@@ -136,4 +136,9 @@ public class BookDbRepository : IBookRepository
         new BookStats { };
         throw new NotImplementedException();
     }
+
+    public bool ExistsById(int id)
+    {
+        return Context.Books.Where(b => b.Id == id).Any(); 
+    }
 }

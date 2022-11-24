@@ -14,4 +14,5 @@ global using ASPNET2.Models;
 global using ASPNET2.Repositories;
 global using ASPNET2.Dtos;
 global using ASPNET2.Services;
+global using ASPNET2.Exceptions;
 

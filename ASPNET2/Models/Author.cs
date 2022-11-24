@@ -3,7 +3,7 @@
 using System.Text.Json.Serialization;
 
 namespace ASPNET2.Models;
-
+[Index(nameof(Email), IsUnique = true)]
 [Table("author")]
 public class Author
 {
@@ -22,6 +22,9 @@ public class Author
 
     [Column("salary"), Precision(14,2)]
     public decimal Salary { get; set; }
+
+    [Column("bonus"), Precision(14, 2)]
+    public decimal? Bonus { get; set; }
 
     [Column("birth_date")]
     public DateTime BirthDate { get; set; }

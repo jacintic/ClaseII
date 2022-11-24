@@ -55,6 +55,11 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("datetime(6)")
                         .HasColumnName("birth_date");
 
+                    b.Property<decimal?>("Bonus")
+                        .HasPrecision(14, 2)
+                        .HasColumnType("decimal(14,2)")
+                        .HasColumnName("bonus");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
@@ -77,6 +82,9 @@ namespace ASPNET2.Db.Migrations
                     b.HasIndex("AddressId")
                         .IsUnique();
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("author");
                 });
 
@@ -91,7 +99,6 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("description");
 
@@ -108,9 +115,13 @@ namespace ASPNET2.Db.Migrations
                         .HasColumnType("decimal(65,30)")
                         .HasColumnName("price");
 
-                    b.Property<int>("ReleaseYear")
+                    b.Property<int?>("ReleaseYear")
+                        .IsRequired()
                         .HasColumnType("int")
                         .HasColumnName("release_year");
+
+                    b.Property<int?>("Status")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()

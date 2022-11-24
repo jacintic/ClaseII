@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ASPNET2.Services;
 
-namespace ASPNET2.Repositories;
-
-public interface IAuthorRepository
+public interface IAuthorService
 {
+
     Author FindById(int id);
 
     Author FindByIdWithInclude(int id);
@@ -30,7 +25,9 @@ public interface IAuthorRepository
 
     bool Remove(int id);
 
-    bool ExistsById(int id);
-
-
+    // CALC
+    AuthorStats CalculateStats();
+    void CalculateBonus();
+    List<Author> FindAllByAddressCity();
+    
 }

@@ -31,4 +31,6 @@ public interface IBookRepository
     // borrar
     bool Delete(int id);
     BookStats CalcStats();
+
+    bool ExistsById(int id);
 }

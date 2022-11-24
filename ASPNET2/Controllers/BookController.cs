@@ -10,10 +10,12 @@ namespace ASPNET2.Controllers;
 public class BookController
 {
     private readonly IBookService BookService;
+    private readonly ILogger<BookController> Logger;
 
-    public BookController(IBookService bookService)
+    public BookController(IBookService bookService, ILogger<BookController> logger)
     {
         BookService = bookService;
+        Logger = logger;
     }
 
 
@@ -95,5 +97,37 @@ public class BookController
         return new BookStats { TotalBooks = 20, MaxPrice = 40 };
     }
 
+    // update
+    // https://localhost:7230/api/books
+    [HttpGet("publish/{id}")]
+    public Book Publish(int id)
+    {
+        return BookService.Publish(id);
+    }
 
+    [HttpGet("publish-by-author/{id}")]
+    public void PublishAllByAuthor(int id)
+    {
+        Logger.LogInformation("Publishing all books b author id: {id}" , id);
+        try
+        {
+            BookService.PublishAllByAuthorId(id);
+            // OK
+        }
+        catch (EntityNotFoundException e)
+        {
+            // NOT FOUND
+            Logger.LogError("Error: {message}", e.Message);
+        }
+        catch (IllegalIdException e)
+        {
+            // BAD REQUEST
+            Logger.LogError("Error: {message}", e.Message);
+        }
+        catch (Exception e)
+        {
+            // UNKNOWN ERROR
+            Logger.LogError("Error: {message}",e.Message);
+        }
+    }
 }

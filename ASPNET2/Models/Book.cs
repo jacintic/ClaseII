@@ -1,4 +1,6 @@
-﻿namespace ASPNET2.Models;
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace ASPNET2.Models;
 
 [Table("book")]
 public class Book
@@ -9,11 +11,11 @@ public class Book
 
     [Required(ErrorMessage = "Title required"),
     Column("title")]
-    public string Title { get; set; }
+    public string? Title { get; set; }
 
     [Required,
     Column("isbn")]
-    public string Isbn { get; set; }
+    public string? Isbn { get; set; }
 
     [Column("img")]
     public string? ImgUrl { get; set; }
@@ -23,12 +25,15 @@ public class Book
     
     [Required,
     Column("release_year")]
-    public int ReleaseYear { get; set; }
+    public int? ReleaseYear { get; set; }
 
     [Column("description")]
-    public string Description { get; set; }
-    // associations
+    public string? Description { get; set; }
 
+    public BookStatus? Status { get; set; } 
+
+    // associations
+    
     public List<Category>? Categories { get; set; }
 
     public Author? Author { get; set; }

@@ -28,7 +28,10 @@ public class AuthorDbRepository : IAuthorRepository
     // find authro by id
     public Author FindById(int id)
     {
-        return Context.Authors.Find(id);
+        Author author = Context.Authors.Find(id);
+        if (author == null)
+            throw new Exception("Author not found");
+        return author;
     }
 
     public Author FindByIdWithInclude(int id)

@@ -43,6 +43,7 @@ builder.Services.AddScoped<IAuthorRepository, AuthorDbRepository>();
 
 // Add services
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IAuthorService, AuthorService>();
 
 
 

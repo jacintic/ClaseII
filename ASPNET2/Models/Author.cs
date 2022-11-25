@@ -21,13 +21,13 @@ public class Author
     public string Email { get; set; }
 
     [Column("salary"), Precision(14,2)]
-    public decimal Salary { get; set; }
+    public decimal? Salary { get; set; }
 
     [Column("bonus"), Precision(14, 2)]
     public decimal? Bonus { get; set; }
 
     [Column("birth_date")]
-    public DateTime BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
 
 
 

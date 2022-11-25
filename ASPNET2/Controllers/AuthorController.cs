@@ -4,27 +4,45 @@ namespace ASPNET2.Controllers;
 
 [ApiController]
 [Route("api/authors")]
-public class AuthorController
+public class AuthorController : ControllerBase
 {
-    private IAuthorRepository AuthRepo;
+    private readonly IAuthorService _authServ;
+    private readonly ILogger<AuthorController> _logger;
 
-    public AuthorController(IAuthorRepository authRepository)
+    public AuthorController(IAuthorService authServ, ILogger<AuthorController> logger)
     {
-        AuthRepo = authRepository;
+        _authServ = authServ;
+        _logger = logger;
     }
 
     // API Methods
     // https://localhost:7230/api/authros/1
     [HttpGet("{id}")]
-    public Author FindById(int id)
+    public IActionResult FindById(int id)
     {
-        return AuthRepo.FindById(id);
+        try
+        {
+            return Ok(_authServ.FindById(id));
+        }
+        catch (Exception e)
+        {
+            _logger.LogWarning("Author not found: {e}", e);
+        }
+        return NotFound();
     }
 
     [HttpGet("include/{id}")]
-    public Author FindByIdWithInclude(int id)
+    public IActionResult FindByIdWithInclude(int id)
     {
-        return AuthRepo.FindByIdWithInclude(id);
+        try
+        {
+            return Ok(_authServ.FindByIdWithInclude(id));
+        }
+        catch (Exception e)
+        {
+            _logger.LogWarning("Author not found: {e}", e);
+        }
+        return NotFound();
     }
 
 
@@ -32,28 +50,28 @@ public class AuthorController
     [HttpGet]
     public List<Author> FindAll()
     {
-        return AuthRepo.FindAll();
+        return _authServ.FindAll();
     }
 
     // https://localhost:7230/api/authros/email
     [HttpGet("email/{email}")]
     public Author FindByEmails(string email)
     {
-        return AuthRepo.FindByEmail(email);
+        return _authServ.FindByEmail(email);
     }
 
     // https://localhost:7230/api/authros/nickname/id
     [HttpGet("nickname/{id}")]
     public string FindNickname(int id)
     {
-        return AuthRepo.FindNickName(id);
+        return _authServ.FindNickName(id);
     }
 
     // https://localhost:7230/api/authros/salgt/min
     [HttpGet("salgt/{min}")]
     public List<Author> FindSalGreaterThan(double min)
     {
-        return AuthRepo.FindSalGreaterThan((decimal)min);
+        return _authServ.FindSalGreaterThan((decimal)min);
     }
 
     // delete
@@ -61,31 +79,66 @@ public class AuthorController
     [HttpGet("salary/min/{min}/max/{max}")]
     public List<Author> FindBySalRange(double min, double max)
     {
-        return AuthRepo.FindBySalRange(min, max);
+        return _authServ.FindBySalRange(min, max);
     }
 
 
     // https://localhost:7230/api/authros
     [HttpPost]
-    public Author Create(Author author)
+    public IActionResult Create(Author author)
     {
-        return AuthRepo.Create(author);
+        
+        try
+        {
+            Author createdAuthor = _authServ.Create(author);
+            return Created($"/api/authors/{createdAuthor.Id}", createdAuthor);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Author can't be created. {e}", e);
+        }
+        return BadRequest();
     }
 
     // update
     // https://localhost:7230/api/authros
     [HttpPut]
-    public Author Update(Author author)
+    public IActionResult Update(Author author)
     {
-        return AuthRepo.Update(author);
+        try
+        {
+            return Ok(_authServ.Update(author));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("Author couldn't be updated. {e}", e);
+            return UnprocessableEntity();
+        }
+        //return Problem();
+        //return BadRequest();
     }
 
     // delete
     // https://localhost:7230/api/authros/1
     [HttpDelete("{id}")]
-    public void DeleteById(int id)
+    public IActionResult DeleteById(int id)
     {
-        AuthRepo.Remove(id);
-
+        
+        try
+        {
+            if (_authServ.Remove(id))
+                return NoContent();
+        }
+        catch (EntityNotFoundException e)
+        {
+            _logger.LogError("{}", e);
+            return NotFound();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError("{}", e);
+            return Problem();
+        }
+        return NotFound();
     }
 }

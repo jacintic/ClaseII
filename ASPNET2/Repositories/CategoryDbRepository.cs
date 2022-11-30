@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ASPNET2.Repositories
 {
-    internal class CategoryDbRepository : ICategoryRepository
+    public class CategoryDbRepository : ICategoryRepository
     {
         // attr
         private AppDbContext Context;
@@ -55,5 +55,10 @@ namespace ASPNET2.Repositories
             return FindById(category.Id);
         }
 
+        public List<Category> FindByMinAge(int age)
+        {
+            return Context.Categories
+                .Where(c => c.MinAge >= age).ToList();
+        }
     }
 }

@@ -17,5 +17,7 @@ namespace ASPNET2.Repositories
         Category Create(Category category);
 
         Category Update(Category category);
+
+        List<Category> FindByMinAge(int age);
     }
 }

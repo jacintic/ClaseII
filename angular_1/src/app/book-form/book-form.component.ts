@@ -85,7 +85,7 @@ export class BookFormComponent implements OnInit {
       releaseYear: this.editForm.get("releaseYear")?.value,
       price: this.editForm.get("price")?.value,
       authorId: this.editForm.get("authorId")?.value,
-      categories: this.editForm.get("categories")?.value,
+      categories: this.categories.filter(cat => this.editForm.get("categories")?.value.includes(cat.id) ),
     } as any
     console.log(book)
     let id = this.editForm.get("id")?.value
@@ -130,7 +130,7 @@ export class BookFormComponent implements OnInit {
           isbn: bookFromBackend.isbn,
           releaseYear: bookFromBackend.releaseYear,
           authorId: bookFromBackend.authorId,
-          categories: bookFromBackend.categories,
+          categories: bookFromBackend.categories?.map(category => category.id)
         } as any)
       },
       error: err => console.log(err)

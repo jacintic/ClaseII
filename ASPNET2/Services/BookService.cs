@@ -42,7 +42,7 @@ public class BookService : IBookService
     {
         if (id == 0)
             throw new Exception("Invalid ID");
-        return BookRepository.FindById(id);
+        return BookRepository.FindByIdWithAssociations(id);
     }
     public List<Book> FindByTitleContains(string title)
     {

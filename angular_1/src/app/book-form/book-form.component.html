@@ -54,7 +54,7 @@
     <mat-label>Categorias</mat-label>
     <mat-select formControlName="categories" multiple>
       <!--[formControl]="categories"-->
-      <mat-option *ngFor="let category of categories" [value]="category">
+      <mat-option *ngFor="let category of categories" [value]="category.id">
         {{category.name}}, minimum age: {{category.minAge}}
       </mat-option>
     </mat-select>
